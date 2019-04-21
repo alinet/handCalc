@@ -1,0 +1,78 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title class="jawlhcard">
+     حاسبة الهاند
+    </ion-title>
+  </ion-toolbar>
+  <ion-item color="Primary" lines="none" class="jawlhcard">
+    <ion-label>
+      <h2>لهم</h2>
+    </ion-label>
+    <ion-label color="primary">
+      <h2>لنا</h2>
+    </ion-label>
+  </ion-item>
+ 
+  <ion-item color="Primary" lines="none" class="jawlhcard">
+      <ion-label color="danger">
+          <h2>270</h2>
+        </ion-label>
+     </ion-item>
+  
+     <ion-item color="Primary" lines="none" class="jawlhcard">
+        <ion-label color="medium">
+            <h2>الفرق اقل من خلوص</h2>
+          </ion-label>
+       </ion-item>
+    
+
+  <ion-item color="Primary" lines="none" class="jawlhcard">
+    <ion-label>
+      <h2>الجولة الحالية : 3</h2>
+      </ion-label>
+   
+   
+  </ion-item>
+</ion-header>
+
+
+<ion-content padding>
+   
+    <ion-content>
+        <ion-card class="jawlhcard">
+          
+          <ion-card-header color="primary">
+            
+            <ion-card-title >الجولة :  2</ion-card-title>
+           
+        </ion-card-header>
+          <ion-item class="jawlhcard">
+            <ion-label>الفرق</ion-label>
+            <ion-label>لهم</ion-label>
+            <ion-label>لنا</ion-label>
+          </ion-item>
+      
+          <ion-item class="jawlhcard">
+            <ion-label>270</ion-label>
+            <ion-label>-30</ion-label>
+            <ion-label>300</ion-label>
+          </ion-item>
+          
+        </ion-card>
+      </ion-content>
+      
+  </ion-content>
+
+  <ion-footer class="jawlhcard">
+      <ion-button (click)="clearLocalForge()" fill="outline" style="width: 45%;height:50px;"> لعبة جديدة 
+      <ion-icon name="refresh" style="padding-left:7px;">  </ion-icon>
+      </ion-button>
+    
+
+      <ion-button (click)="openModal()" color="primary" style="width: 45%; height:50px;">
+          اضافة جولة
+        <ion-icon name="add" style="padding-left:7px;"></ion-icon>    
+                 </ion-button>
+    
+  </ion-footer>
+  
