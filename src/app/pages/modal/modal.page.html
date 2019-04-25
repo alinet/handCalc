@@ -3,92 +3,137 @@
 <ion-header>
   <ion-toolbar>
    
-   <ion-row align-items-center>
-     
-     <ion-col style="padding-left: 35%;"><h1> اضافة جولة </h1> </ion-col>
-
-     <ion-col>
+   <ion-row>
+     <ion-col size="10" style="display:flex;align-items: center;justify-content: center;text-align: center;">
+     <h1> اضافة جولة </h1> </ion-col>
+     <ion-col size="2" style="padding-top:10px;">
     <ion-button fill="outline" float-right (click)="closeModal()"> 
         <ion-icon name="close" ></ion-icon>
       </ion-button>
     </ion-col>
-   
-
     </ion-row>
-    
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content >
 
-    
-    <ion-radio-group> 
-    <ion-row align-items-center >
-        <ion-col>
-            <ion-item lines="none" style="padding-left: 40%;">
-                <ion-label>لهم</ion-label>
-                 <ion-radio value="lahom" ></ion-radio>
-               </ion-item>
-        </ion-col>
-        <ion-col>
-          <ion-item  lines="none" style="padding-left:40%;">
-            <ion-label>لنا</ion-label>
-            <ion-radio  value="lana">
-            </ion-radio>
-          </ion-item>
-        </ion-col>
-        <ion-col>
-          <ion-item lines="none" style="padding-left:30%;" >
-           
-              <ion-icon name="trophy" color="primary"></ion-icon>
-              
+    <ion-grid >
+    <ion-radio-group (ionChange)="teamValue($event)" style="vertical-align: middle;justify-content: center;display: flex;align-items: center;"> 
+     <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
+  <ion-row>
+
+    <ion-col>
+              <ion-item lines=none>
+                 <ion-label style="padding-right:5px;" >لهـم</ion-label>
+                 <ion-radio id="lahom" formControlName="winner" name="winner" value="lahom" ></ion-radio>
              </ion-item>
-        </ion-col>
-      </ion-row> 
-      </ion-radio-group>
+    </ion-col>
+   
+     <ion-col>
+              <ion-item lines=none>
+                <ion-label style="padding-right:5px;">لنـا</ion-label>
+            <ion-radio id="lana" formControlName="winner" name="winner" value="lana"> </ion-radio>
+             </ion-item>
+    </ion-col>
+    <ion-col style="justify-content: center;display: flex;align-items: center;">
+  <ion-icon color="primary" style="font-size: 32px;" name="trophy"></ion-icon>
+    </ion-col>
+  </ion-row>
+    </form>
+    </ion-radio-group>
+     
+</ion-grid>
+
+
+  <ion-grid >
+    <ion-radio-group (ionChange)="winnerValue($event)"> 
     
-      
-      <ion-list lines="none" style="float:right;padding-right: 35%;width: 78%" >
-          <ion-radio-group>
-             
-            <ion-item align-items-center >
-              
-              <ion-radio slot="end" (ionSelect)="$event" value="khlosSafi" checked></ion-radio>
-              <ion-label>خلوص صافي</ion-label>
-              
-            </ion-item>
-        
-            <ion-item>
-              
-                <ion-radio slot="end" value="dabalSafi" checked></ion-radio>
-                <ion-label>دبل صافي</ion-label>
-
+  <ion-row align-items-center>
+  <ion-col>
+  
+    
+            <ion-item lines=none>
+                  <ion-label style="margin-left:30%;">خلوص صافي</ion-label>
+                  <ion-radio style="margin-right:35%;" value="khlosSafi"></ion-radio>
+      </ion-item>
+  </ion-col>
+  </ion-row>
+  
+  <ion-row>
+  <ion-col > 
+              <ion-item lines=none>
+               <ion-label style="margin-left:35%;">دبل صافي</ion-label>
+                  <ion-radio style="margin-right:35%;" value="dabalSafi"></ion-radio>
               </ion-item>
-        
-              <ion-item>
-              
-                  <ion-radio slot="end" value="khlos" checked></ion-radio>
-                  <ion-label>خلوص غيرصافي</ion-label>
-                </ion-item>
-                <ion-item>
-              
-                    <ion-radio slot="end" value="dabal" checked></ion-radio>
-                    <ion-label>دبل غير صافي</ion-label>
-                  </ion-item>
-                  <ion-item>
-                         
-                        <ion-radio slot="end" value="tasjilah" checked></ion-radio>
-                        <ion-label>تسجيلة</ion-label>
-                      </ion-item>
+ </ion-col>
+ </ion-row>
 
-          </ion-radio-group>
-        </ion-list>
-                 
-          
-       
+ <ion-row>
+  <ion-col > 
+  
+             <ion-item lines=none>
+                  <ion-label style="margin-left:40%;" >خلوص</ion-label>
+                  <ion-radio style="margin-right:35%;" value="khlos"></ion-radio>
+             </ion-item>
+</ion-col>
+</ion-row>
+<ion-row>
+  <ion-col> 
+  
+             <ion-item lines=none>
+                    <ion-label style="margin-left:45%;">دبـل</ion-label>
+                <ion-radio  style="margin-right:35%;" value="dabal" ></ion-radio>
+             </ion-item>
+ </ion-col>
+ </ion-row>
+
+ <ion-row>
+ <ion-col>
+             <ion-item lines=none>
+             <ion-label style="margin-left:40%;">تسجيلة</ion-label>
+             <ion-radio  style="margin-right:35%;" value="tasjilah" ></ion-radio>
+             </ion-item>
+  </ion-col>
+ </ion-row>
+    
+    </ion-radio-group>
+     
+</ion-grid>
+      
+<ion-grid [hidden]="ishidden">
+   
+    
+  <ion-row align-items-center>
+      <ion-col>
+        <ion-item>
+          <ion-label text-right> عدد النازلين </ion-label>
+        </ion-item>
+         <ion-segment>
+          <ion-segment-button (ionSelect)="segmentButtonClicked($event)">
+            <ion-label>3</ion-label>
+          </ion-segment-button>
+          <ion-segment-button (ionSelect)="segmentButtonClicked($event)">
+             <ion-label>2</ion-label>
+            </ion-segment-button>
+          <ion-segment-button (ionSelect)="segmentButtonClicked($event)">
+             <ion-label>1</ion-label>
+              </ion-segment-button>
+          </ion-segment>
+      </ion-col>
+    </ion-row>
+  <ion-row>
+  <ion-col> 
+  <ion-item>
+  <ion-label text-right position="floating">المجموع</ion-label>
+  <ion-input text-right color="primary" type="number" value=""></ion-input>
+</ion-item>
+</ion-col>
+</ion-row>    
+</ion-grid>
+
 </ion-content>
 <ion-footer>
 
- <ion-button (click)="addto()"> اضافة </ion-button>
+ <ion-button (click)="onSubmit()"> اضافة </ion-button>
 
 </ion-footer>

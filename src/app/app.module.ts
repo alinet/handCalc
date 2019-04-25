@@ -14,7 +14,7 @@ import { ModalPage } from './pages/modal/modal.page';
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, ModalPageModule,FormsModule, ReactiveFormsModule ],
+  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, ModalPageModule, FormsModule, ReactiveFormsModule ],
   providers: [
     StatusBar,
     SplashScreen,

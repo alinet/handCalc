@@ -11,6 +11,7 @@ import { HomePage } from './home.page';
   imports: [
     CommonModule,
     FormsModule,
+    ReactiveFormsModule,
     IonicModule,
     RouterModule.forChild([
       {

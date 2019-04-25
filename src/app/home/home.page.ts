@@ -21,7 +21,7 @@ constructor(private modalController: ModalController) {
 async openModal() {
   const modal = await this.modalController.create({
     component: ModalPage,
-
+    cssClass: 'my-custom-modal-css',
   //  componentProps: { value: 123 }
   });
   return await modal.present();
