@@ -6,6 +6,9 @@ import { REACTIVE_DRIVEN_DIRECTIVES } from '@angular/forms/src/directives';
 import { Directive } from '@angular/core';
 import { element } from '@angular/core/src/render3';
 import { ValueAccessor } from '@ionic/angular/dist/directives/control-value-accessors/value-accessor';
+import {NgForageModule, NgForageConfig, Driver, NgForage} from 'ngforage';
+import { ngfactoryFilePath } from '@angular/compiler/src/aot/util';
+
 
 
 @Component({
@@ -16,12 +19,16 @@ import { ValueAccessor } from '@ionic/angular/dist/directives/control-value-acce
 })
 
 export class ModalPage implements OnInit {
-
-  myForm: FormGroup;
-  teamVal: string;
+ jawlahNo: number;
+ winnerTeam: string;
+  winType: string;
   winnerVal: string;
-  constructor(private modalController: ModalController, public fb: FormBuilder) {
-
+  losserVal: string;
+  isTasjilah: boolean;
+ jawalinfo: string[];
+  myForm: FormGroup;
+  
+  constructor(private modalController: ModalController, public fb: FormBuilder , public ngstore: NgForage) {
 
   }
   async closeModal() {
@@ -33,10 +40,9 @@ export class ModalPage implements OnInit {
   ngOnInit() {
     
      this.myForm = this.fb.group({
-     winner : [''],
+     //winner : [''],
 
-
-      });
+    });
       //this.myForm.valueChanges.subscribe(console.log);
       //console.log(this.myForm.value);
 
@@ -45,31 +51,63 @@ export class ModalPage implements OnInit {
 
   teamValue(event)
   {
-    this.teamVal = event.detail.value;
+    
+    this.winnerTeam = event.detail.value;
+  
   }
 
   winnerValue(event)
   {
-    this.winnerVal = event.detail.value;
-    console.log(this.winnerVal);
+    this.winType = event.detail.value;
+   
+  //  console.log(this.winnerVal);
   }
 
-  
+onSubmit(event): void {
+  var alength = localStorage.length;
+    //console.log(this.teamVal);
+    //console.log(this.winnerVal);
+    if(this.winnerTeam == 'lana' && this.winType == 'khlosSafi'){
+      if(alength == 0){
+        this.jawlahNo = 0;
+        this.jawlahNo += 1;
+      } else {
+        this.jawlahNo +=1
+      }
+          this.winnerVal = '-30';
+          this.losserVal = '300';
+          this.isTasjilah = false;
+    }
+    else if(this.winnerTeam =='lahom' && this.winType == 'khlosSafi'){
+      
+      if(alength == 0){
+        this.jawlahNo = 0;
+        this.jawlahNo += 1;
+      } else {
+        this.jawlahNo +=1
+      }
+          this.winnerVal = '-30';
+          this.losserVal = '300';
+          this.isTasjilah = false;
+    }
 
-   onSubmit(event): void {
+    else if(this.winnerTeam =='lana' && this.winType == 'tasjilah'){
 
-    //console.log(this.myForm.value);
+      // think about how this should work
+    }
 
-    alert(this.teamVal);
-    alert(this.winnerVal);
-     
+    this.jawalinfo =[this.winnerTeam, JSON.stringify(this.jawlahNo),this.winnerVal,this.losserVal,JSON.stringify(this.isTasjilah)];
+
+
+    localStorage.setItem(JSON.stringify(this.jawlahNo), JSON.stringify(this.jawalinfo));
+   
+      
+
 
    }
+  
    
-  //  addto(): void {
-  //   // console.log(event);
-
-  // }
+  
 
 
 

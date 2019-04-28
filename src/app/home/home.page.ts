@@ -7,17 +7,35 @@ import { RadioControlRegistry } from '@angular/forms/src/directives/radio_contro
 import { FormBuilder, FormGroup, ReactiveFormsModule, FormControl, Form, FormsModule } from '@angular/forms';
 import { REACTIVE_DRIVEN_DIRECTIVES } from '@angular/forms/src/directives';
 import { Directive } from '@angular/core';
-//import * as localForage from 'localforage';
-//const localforage = require('localforage');
+import {NgForageModule, NgForageConfig, Driver, NgForage} from 'ngforage';
+import { ngfactoryFilePath } from '@angular/compiler/src/aot/util';
+
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
-constructor(private modalController: ModalController) {
+constructor(private modalController: ModalController, public ngstore: NgForage) {
 }
 
+ngOnInit() {
+  for (var i = 0; i < localStorage.length; i++){
+    localStorage.getItem(localStorage.key(i));
+   
+   // console.log(localStorage.getItem(localStorage.key(i)));
+   
+    var all = (localStorage.key(i));
+   var myall = JSON.parse(localStorage.getItem(all));
+   
+   
+
+  
+console.log(myall[3]);
+  
+
+ }
+}
 async openModal() {
   const modal = await this.modalController.create({
     component: ModalPage,
@@ -27,7 +45,9 @@ async openModal() {
   return await modal.present();
 }
 async clearLocalForge(){
-  //localforage.clear();
+this.ngstore.clear();
+
+
 }
 
  
