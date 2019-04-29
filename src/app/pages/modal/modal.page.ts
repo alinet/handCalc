@@ -6,8 +6,9 @@ import { REACTIVE_DRIVEN_DIRECTIVES } from '@angular/forms/src/directives';
 import { Directive } from '@angular/core';
 import { element } from '@angular/core/src/render3';
 import { ValueAccessor } from '@ionic/angular/dist/directives/control-value-accessors/value-accessor';
-import {NgForageModule, NgForageConfig, Driver, NgForage} from 'ngforage';
+
 import { ngfactoryFilePath } from '@angular/compiler/src/aot/util';
+import { stringify } from '@angular/core/src/util';
 
 
 
@@ -22,96 +23,91 @@ export class ModalPage implements OnInit {
  jawlahNo: number;
  winnerTeam: string;
   winType: string;
-  winnerVal: string;
-  losserVal: string;
+  lanaVal: number;
+  lahomVal: number;
   isTasjilah: boolean;
- jawalinfo: string[];
+ jawalinfo: any[];
+ nazilCount: number;
   myForm: FormGroup;
-  
-  constructor(private modalController: ModalController, public fb: FormBuilder , public ngstore: NgForage) {
+  majmo: string;
+   
 
+  
+  constructor(private modalController: ModalController, public fb: FormBuilder) {
   }
   async closeModal() {
     const modal = await this.modalController.dismiss();
     return modal;
    }
-
-
   ngOnInit() {
-    
      this.myForm = this.fb.group({
      //winner : [''],
-
     });
-      //this.myForm.valueChanges.subscribe(console.log);
-      //console.log(this.myForm.value);
-
-
   }
 
   teamValue(event)
-  {
-    
-    this.winnerTeam = event.detail.value;
-  
-  }
+  {this.winnerTeam = event.detail.value;  }
 
   winnerValue(event)
-  {
-    this.winType = event.detail.value;
-   
-  //  console.log(this.winnerVal);
+  { this.winType = event.detail.value;}
+
+  nazilValue(event) {
+    this.nazilCount = event.detail.value;
+    //console.log(this.nazilCount);
   }
 
-onSubmit(event): void {
+  majmoValue(event){
+   this.majmo = event.target.value;
+     
+  }
+  
+onSubmit(): void {
+ 
   var alength = localStorage.length;
-    //console.log(this.teamVal);
-    //console.log(this.winnerVal);
+    
     if(this.winnerTeam == 'lana' && this.winType == 'khlosSafi'){
-      if(alength == 0){
-        this.jawlahNo = 0;
-        this.jawlahNo += 1;
-      } else {
-        this.jawlahNo +=1
-      }
-          this.winnerVal = '-30';
-          this.losserVal = '300';
+      if(alength == 0){ this.jawlahNo = 0; this.jawlahNo += 1; } else { this.jawlahNo +=1}
+          this.lanaVal = -30;
+          this.lahomVal = 300;
           this.isTasjilah = false;
     }
-    else if(this.winnerTeam =='lahom' && this.winType == 'khlosSafi'){
+    else if(this.winnerTeam =='lana' && this.winType == 'dabalSafi'){
+      if (alength== 0) {this.jawlahNo = 0;this.jawlahNo += 1; } else {this.jawlahNo +=1}
+      this.lanaVal = -60;
+      this.lahomVal = 600;
+      this.isTasjilah = false;
+    } 
+    else if(this.winnerTeam =='lana' && this.winType == 'khlos'){
+      if (alength== 0) {this.jawlahNo = 0;this.jawlahNo += 1; } else {this.jawlahNo +=1}
+      this.lanaVal = -30;
       
-      if(alength == 0){
-        this.jawlahNo = 0;
-        this.jawlahNo += 1;
-      } else {
-        this.jawlahNo +=1
+      if(this.nazilCount == 1){
+        
+	    this.lahomVal = (200 + parseInt(this.majmo,10));
+
+        // = (200) + this.majmo;
       }
-          this.winnerVal = '-30';
-          this.losserVal = '300';
-          this.isTasjilah = false;
+      else if (this.nazilCount ==2){
+        this.lahomVal = 100 + parseInt(this.majmo,10)
+      }
+      else if (this.nazilCount == 3){
+        this.lahomVal = parseInt(this.majmo,10)
+      }
+      this.isTasjilah = false;
+    } 
+    else if(this.winnerTeam =='lana' && this.winType == 'dabal'){
+      if (alength== 0) {this.jawlahNo = 0;this.jawlahNo += 1; } else {this.jawlahNo +=1}
+      this.lanaVal = -60;
+      this.lahomVal = 300;
+      this.isTasjilah = false;
+    } 
+    
+    else if (this.winnerTeam == 'lana' && this.winType == 'tasjilah'){
+  // think about how this should work
     }
-
-    else if(this.winnerTeam =='lana' && this.winType == 'tasjilah'){
-
-      // think about how this should work
-    }
-
-    this.jawalinfo =[this.winnerTeam, JSON.stringify(this.jawlahNo),this.winnerVal,this.losserVal,JSON.stringify(this.isTasjilah)];
-
-
+   this.jawalinfo =[this.winnerTeam, this.jawlahNo ,this.lanaVal,this.lahomVal,this.isTasjilah];
     localStorage.setItem(JSON.stringify(this.jawlahNo), JSON.stringify(this.jawalinfo));
-   
-      
-
-
    }
-  
-   
-  
-
-
-
-
 }
 
 

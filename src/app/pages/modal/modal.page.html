@@ -23,14 +23,14 @@
   <ion-row>
 
     <ion-col>
-              <ion-item lines=none>
+              <ion-item lines="none">
                  <ion-label style="padding-right:5px;" >لهـم</ion-label>
                  <ion-radio id="lahom" formControlName="winner" name="winner" value="lahom" ></ion-radio>
              </ion-item>
     </ion-col>
    
      <ion-col>
-              <ion-item lines=none>
+              <ion-item lines="none">
                 <ion-label style="padding-right:5px;">لنـا</ion-label>
             <ion-radio id="lana" formControlName="winner" name="winner" value="lana"> </ion-radio>
              </ion-item>
@@ -52,7 +52,7 @@
   <ion-col>
   
     
-            <ion-item lines=none>
+            <ion-item lines="none">
                   <ion-label style="margin-left:30%;">خلوص صافي</ion-label>
                   <ion-radio style="margin-right:35%;" value="khlosSafi"></ion-radio>
       </ion-item>
@@ -61,7 +61,7 @@
   
   <ion-row>
   <ion-col > 
-              <ion-item lines=none>
+              <ion-item lines="none">
                <ion-label style="margin-left:35%;">دبل صافي</ion-label>
                   <ion-radio style="margin-right:35%;" value="dabalSafi"></ion-radio>
               </ion-item>
@@ -71,7 +71,7 @@
  <ion-row>
   <ion-col > 
   
-             <ion-item lines=none>
+             <ion-item lines="none">
                   <ion-label style="margin-left:40%;" >خلوص</ion-label>
                   <ion-radio style="margin-right:35%;" value="khlos"></ion-radio>
              </ion-item>
@@ -80,7 +80,7 @@
 <ion-row>
   <ion-col> 
   
-             <ion-item lines=none>
+             <ion-item lines="none">
                     <ion-label style="margin-left:45%;">دبـل</ion-label>
                 <ion-radio  style="margin-right:35%;" value="dabal" ></ion-radio>
              </ion-item>
@@ -89,7 +89,7 @@
 
  <ion-row>
  <ion-col>
-             <ion-item lines=none>
+             <ion-item lines="none">
              <ion-label style="margin-left:40%;">تسجيلة</ion-label>
              <ion-radio  style="margin-right:35%;" value="tasjilah" ></ion-radio>
              </ion-item>
@@ -108,14 +108,14 @@
         <ion-item>
           <ion-label text-right> عدد النازلين </ion-label>
         </ion-item>
-         <ion-segment>
-          <ion-segment-button (ionSelect)="segmentButtonClicked($event)">
+         <ion-segment (ionChange)="nazilValue($event)">
+          <ion-segment-button value="3">
             <ion-label>3</ion-label>
           </ion-segment-button>
-          <ion-segment-button (ionSelect)="segmentButtonClicked($event)">
+          <ion-segment-button value="2">
              <ion-label>2</ion-label>
             </ion-segment-button>
-          <ion-segment-button (ionSelect)="segmentButtonClicked($event)">
+          <ion-segment-button value="1">
              <ion-label>1</ion-label>
               </ion-segment-button>
           </ion-segment>
@@ -125,7 +125,7 @@
   <ion-col> 
   <ion-item>
   <ion-label text-right position="floating">المجموع</ion-label>
-  <ion-input text-right color="primary" type="number" value=""></ion-input>
+  <ion-input text-right color="primary" type="number"  value="" (ionInput)="majmoValue($event)"></ion-input>
 </ion-item>
 </ion-col>
 </ion-row>    
