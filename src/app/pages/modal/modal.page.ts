@@ -64,7 +64,7 @@ export class ModalPage implements OnInit {
 onSubmit(): void {
  
   var alength = localStorage.length;
-    
+    //team lana 
     if(this.winnerTeam == 'lana' && this.winType == 'khlosSafi'){
       if(alength == 0){ this.jawlahNo = 0; this.jawlahNo += 1; } else { this.jawlahNo +=1}
           this.lanaVal = -30;
@@ -80,13 +80,11 @@ onSubmit(): void {
     else if(this.winnerTeam =='lana' && this.winType == 'khlos'){
       if (alength== 0) {this.jawlahNo = 0;this.jawlahNo += 1; } else {this.jawlahNo +=1}
       this.lanaVal = -30;
-      
+
       if(this.nazilCount == 1){
         
 	    this.lahomVal = (200 + parseInt(this.majmo,10));
-
-        // = (200) + this.majmo;
-      }
+    }
       else if (this.nazilCount ==2){
         this.lahomVal = 100 + parseInt(this.majmo,10)
       }
@@ -98,14 +96,71 @@ onSubmit(): void {
     else if(this.winnerTeam =='lana' && this.winType == 'dabal'){
       if (alength== 0) {this.jawlahNo = 0;this.jawlahNo += 1; } else {this.jawlahNo +=1}
       this.lanaVal = -60;
-      this.lahomVal = 300;
+
+      if(this.nazilCount == 1){
+        
+	    this.lahomVal = (400 + parseInt(this.majmo,10)*2);
+    }
+      else if (this.nazilCount ==2){
+        this.lahomVal = (200 + parseInt(this.majmo,10)*2)
+      }
+      else if (this.nazilCount == 3){
+        this.lahomVal = parseInt(this.majmo,10)*2
+      }
       this.isTasjilah = false;
-    } 
-    
+     
+      //team lahom 
+      
+   } 
+   if(this.winnerTeam == 'lahom' && this.winType == 'khlosSafi'){
+    if(alength == 0){ this.jawlahNo = 0; this.jawlahNo += 1; } else { this.jawlahNo +=1}
+        this.lanaVal = 300;
+        this.lahomVal = -30;
+        this.isTasjilah = false;
+  }
+  else if(this.winnerTeam =='lahom' && this.winType == 'dabalSafi'){
+    if (alength== 0) {this.jawlahNo = 0;this.jawlahNo += 1; } else {this.jawlahNo +=1}
+    this.lanaVal = 600;
+    this.lahomVal = -60;
+    this.isTasjilah = false;
+  } 
+  else if(this.winnerTeam =='lahom' && this.winType == 'khlos'){
+    if (alength== 0) {this.jawlahNo = 0;this.jawlahNo += 1; } else {this.jawlahNo +=1}
+    this.lahomVal = -30;
+
+    if(this.nazilCount == 1){
+      
+    this.lanaVal = (200 + parseInt(this.majmo,10));
+  }
+    else if (this.nazilCount ==2){
+      this.lanaVal= 100 + parseInt(this.majmo,10)
+    }
+    else if (this.nazilCount == 3){
+      this.lanaVal = parseInt(this.majmo,10)
+    }
+    this.isTasjilah = false;
+  } 
+  else if(this.winnerTeam =='lahom' && this.winType == 'dabal'){
+    if (alength== 0) {this.jawlahNo = 0;this.jawlahNo += 1; } else {this.jawlahNo +=1}
+    this.lahomVal = -60;
+
+    if(this.nazilCount == 1){
+      
+    this.lanaVal = (400 + parseInt(this.majmo,10)*2);
+  }
+    else if (this.nazilCount ==2){
+      this.lanaVal = (200 + parseInt(this.majmo,10)*2)
+    }
+    else if (this.nazilCount == 3){
+      this.lanaVal = parseInt(this.majmo,10)*2
+    }
+    this.isTasjilah = false;
+  }
+
     else if (this.winnerTeam == 'lana' && this.winType == 'tasjilah'){
   // think about how this should work
     }
-   this.jawalinfo =[this.winnerTeam, this.jawlahNo ,this.lanaVal,this.lahomVal,this.isTasjilah];
+   this.jawalinfo =[ this.jawlahNo,this.winnerTeam ,this.lanaVal,this.lahomVal,this.isTasjilah];
     localStorage.setItem(JSON.stringify(this.jawlahNo), JSON.stringify(this.jawalinfo));
    }
 }
