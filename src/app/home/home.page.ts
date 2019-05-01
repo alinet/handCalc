@@ -9,6 +9,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, FormControl, Form, FormsMo
 import { REACTIVE_DRIVEN_DIRECTIVES } from '@angular/forms/src/directives';
 import { Directive } from '@angular/core';
 import { ngfactoryFilePath } from '@angular/compiler/src/aot/util';
+import { ReturnStatement } from '@angular/compiler';
 
 @Component({
   selector: 'app-home',
@@ -16,10 +17,19 @@ import { ngfactoryFilePath } from '@angular/compiler/src/aot/util';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
+  currentJawlah: string;
+
 constructor(private modalController: ModalController) {
+this.currentJawlah = '1';
+
+
+
+  
 }
 
 ngOnInit() {
+
+
   var sumLana = 0;
   var sumLahom =0;
   var farq = 0;
@@ -41,7 +51,42 @@ ngOnInit() {
  //console.log(sumLahom);
  console.log(sumLana,sumLahom,farq);
 
+ if(localStorage.length == 0){
+  this.currentJawlah = '1';
+  }
+else {
+
+var cv = localStorage.length;
+console.log(cv);
+var total = (cv + 1);
+console.log()
+ let a = total.toString();
+
+this.currentJawlah = a ;
+console.log(isNaN(parseInt(this.currentJawlah)));
 }
+
+
+for (var i = 0; i < localStorage.length; i++){
+ 
+   var all = (localStorage.key(i));
+if(all == 'null'){
+    var b ;
+    b = parseInt(this.currentJawlah) -1;
+    this.currentJawlah = b.toString();
+    console.log(this.currentJawlah)
+  console.log("hi");
+}
+
+    console.log(all);
+  }
+ 
+
+}
+
+
+
+
 async openModal() {
   const modal = await this.modalController.create({
     component: ModalPage,
@@ -53,8 +98,7 @@ async openModal() {
 async clearLocalForge(){
 localStorage.clear();
 
-
 }
 
- 
+
 }

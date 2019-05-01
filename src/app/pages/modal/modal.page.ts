@@ -64,15 +64,22 @@ export class ModalPage implements OnInit {
 onSubmit(): void {
  
   var alength = localStorage.length;
+  
+  
+   
+  
     //team lana 
     if(this.winnerTeam == 'lana' && this.winType == 'khlosSafi'){
-      if(alength == 0){ this.jawlahNo = 0; this.jawlahNo += 1; } else { this.jawlahNo +=1}
-          this.lanaVal = -30;
-          this.lahomVal = 300;
-          this.isTasjilah = false;
+      if(alength == 0){ this.jawlahNo = 0; 
+        this.jawlahNo += 1; } 
+        else {this.jawlahNo +=1}
+      
+        this.lanaVal = -30;
+      this.lahomVal = 300;
+      this.isTasjilah = false;
     }
     else if(this.winnerTeam =='lana' && this.winType == 'dabalSafi'){
-      if (alength== 0) {this.jawlahNo = 0;this.jawlahNo += 1; } else {this.jawlahNo +=1}
+      if (alength== 0) {this.jawlahNo += 1; } else { this.jawlahNo += 1; }
       this.lanaVal = -60;
       this.lahomVal = 600;
       this.isTasjilah = false;
@@ -160,7 +167,7 @@ onSubmit(): void {
     else if (this.winnerTeam == 'lana' && this.winType == 'tasjilah'){
   // think about how this should work
     }
-   this.jawalinfo =[ this.jawlahNo,this.winnerTeam ,this.lanaVal,this.lahomVal,this.isTasjilah];
+   this.jawalinfo =[ this.jawlahNo, this.winnerTeam, this.lanaVal, this.lahomVal, this.isTasjilah];
     localStorage.setItem(JSON.stringify(this.jawlahNo), JSON.stringify(this.jawalinfo));
    }
 }
