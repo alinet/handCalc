@@ -20,7 +20,8 @@ import { stringify } from '@angular/core/src/util';
 })
 
 export class ModalPage implements OnInit {
- jawlahNo: number;
+  currentvalue;
+ jawlahNo: string;
  winnerTeam: string;
   winType: string;
   lanaVal: number;
@@ -30,7 +31,9 @@ export class ModalPage implements OnInit {
  nazilCount: number;
   myForm: FormGroup;
   majmo: string;
+  taVal: any;
    
+  
 
   
   constructor(private modalController: ModalController, public fb: FormBuilder) {
@@ -43,6 +46,7 @@ export class ModalPage implements OnInit {
      this.myForm = this.fb.group({
      //winner : [''],
     });
+    console.log(this.currentvalue);
   }
 
   teamValue(event)
@@ -69,23 +73,25 @@ onSubmit(): void {
    
   
     //team lana 
-    if(this.winnerTeam == 'lana' && this.winType == 'khlosSafi'){
-      if(alength == 0){ this.jawlahNo = 0; 
-        this.jawlahNo += 1; } 
-        else {this.jawlahNo +=1}
-      
+     if(this.winnerTeam == 'lana' && this.winType == 'khlosSafi'){
+    //   if(alength == 0){ this.jawlahNo = 0; 
+    //     this.jawlahNo += 1; } 
+    //     else {this.jawlahNo +=1}
+      this.jawlahNo = this.currentvalue;
         this.lanaVal = -30;
       this.lahomVal = 300;
       this.isTasjilah = false;
     }
     else if(this.winnerTeam =='lana' && this.winType == 'dabalSafi'){
-      if (alength== 0) {this.jawlahNo += 1; } else { this.jawlahNo += 1; }
+      // if (alength== 0) {this.jawlahNo += 1; } else { this.jawlahNo += 1; }
+      this.jawlahNo = this.currentvalue;
       this.lanaVal = -60;
       this.lahomVal = 600;
       this.isTasjilah = false;
     } 
     else if(this.winnerTeam =='lana' && this.winType == 'khlos'){
-      if (alength== 0) {this.jawlahNo = 0;this.jawlahNo += 1; } else {this.jawlahNo +=1}
+      // if (alength== 0) {this.jawlahNo = 0;this.jawlahNo += 1; } else {this.jawlahNo +=1}
+      this.jawlahNo = this.currentvalue;
       this.lanaVal = -30;
 
       if(this.nazilCount == 1){
@@ -101,7 +107,8 @@ onSubmit(): void {
       this.isTasjilah = false;
     } 
     else if(this.winnerTeam =='lana' && this.winType == 'dabal'){
-      if (alength== 0) {this.jawlahNo = 0;this.jawlahNo += 1; } else {this.jawlahNo +=1}
+      // if (alength== 0) {this.jawlahNo = 0;this.jawlahNo += 1; } else {this.jawlahNo +=1}
+      this.jawlahNo = this.currentvalue;
       this.lanaVal = -60;
 
       if(this.nazilCount == 1){
@@ -120,19 +127,22 @@ onSubmit(): void {
       
    } 
    if(this.winnerTeam == 'lahom' && this.winType == 'khlosSafi'){
-    if(alength == 0){ this.jawlahNo = 0; this.jawlahNo += 1; } else { this.jawlahNo +=1}
+    // if(alength == 0){ this.jawlahNo = 0; this.jawlahNo += 1; } else { this.jawlahNo +=1}
+    this.jawlahNo = this.currentvalue;
         this.lanaVal = 300;
         this.lahomVal = -30;
         this.isTasjilah = false;
   }
   else if(this.winnerTeam =='lahom' && this.winType == 'dabalSafi'){
-    if (alength== 0) {this.jawlahNo = 0;this.jawlahNo += 1; } else {this.jawlahNo +=1}
+    // if (alength== 0) {this.jawlahNo = 0;this.jawlahNo += 1; } else {this.jawlahNo +=1}
+    this.jawlahNo = this.currentvalue;
     this.lanaVal = 600;
     this.lahomVal = -60;
     this.isTasjilah = false;
   } 
   else if(this.winnerTeam =='lahom' && this.winType == 'khlos'){
-    if (alength== 0) {this.jawlahNo = 0;this.jawlahNo += 1; } else {this.jawlahNo +=1}
+    // if (alength== 0) {this.jawlahNo = 0;this.jawlahNo += 1; } else {this.jawlahNo +=1}
+    this.jawlahNo = this.currentvalue;
     this.lahomVal = -30;
 
     if(this.nazilCount == 1){
@@ -148,7 +158,8 @@ onSubmit(): void {
     this.isTasjilah = false;
   } 
   else if(this.winnerTeam =='lahom' && this.winType == 'dabal'){
-    if (alength== 0) {this.jawlahNo = 0;this.jawlahNo += 1; } else {this.jawlahNo +=1}
+    // if (alength== 0) {this.jawlahNo = 0;this.jawlahNo += 1; } else {this.jawlahNo +=1}
+    this.jawlahNo = this.currentvalue;
     this.lahomVal = -60;
 
     if(this.nazilCount == 1){
@@ -164,9 +175,38 @@ onSubmit(): void {
     this.isTasjilah = false;
   }
 
-    else if (this.winnerTeam == 'lana' && this.winType == 'tasjilah'){
-  // think about how this should work
+    else if (this.winnerTeam == 'lana' && this.winType == 'tasjilahKhlos'){
+      this.jawlahNo = 'tasjilah';
+      this.lanaVal = 0;
+      this.lahomVal = 300;
+      this.isTasjilah = true;
+    
     }
+    else if (this.winnerTeam == 'lana' && this.winType == 'tasjilahDabal'){
+      this.jawlahNo = 'tasjilah';
+      this.lanaVal = 0;
+      this.lahomVal = 600;
+      this.isTasjilah = true;
+    
+    }
+
+    else if (this.winnerTeam == 'lahom' && this.winType == 'tasjilahKhlos'){
+      this.taVal += 1;
+      this.jawlahNo = 'tasjilah' + this.taVal;
+      this.lanaVal = 300;
+      this.lahomVal = 0;
+      this.isTasjilah = true;
+    
+    }
+    else if (this.winnerTeam == 'lahom' && this.winType == 'tasjilahDabal'){
+      this.jawlahNo = 'tasjilah';
+      this.lanaVal = 600;
+      this.lahomVal = 0;
+      this.isTasjilah = true;
+    
+    }
+
+
    this.jawalinfo =[ this.jawlahNo, this.winnerTeam, this.lanaVal, this.lahomVal, this.isTasjilah];
     localStorage.setItem(JSON.stringify(this.jawlahNo), JSON.stringify(this.jawalinfo));
    }

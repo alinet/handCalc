@@ -1,5 +1,5 @@
 import { stringify } from 'querystring';
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { NavController, ModalController } from '@ionic/angular';
 import { ModalPage } from '../pages/modal/modal.page';
 import {  OnInit, Injectable } from '@angular/core';
@@ -17,14 +17,11 @@ import { ReturnStatement } from '@angular/compiler';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
-  currentJawlah: string;
+@Input () currentJawlah: string;
 
 constructor(private modalController: ModalController) {
-this.currentJawlah = '1';
+this.currentJawlah ;
 
-
-
-  
 }
 
 ngOnInit() {
@@ -45,10 +42,9 @@ ngOnInit() {
   sumLana += sumLanaVal;
   sumLahom += sumLahomVal;
   farq = sumLahom - sumLana;
-  //var myval =Math.abs(farq);
+ 
  }
- //console.log(sumLana);
- //console.log(sumLahom);
+ 
  console.log(sumLana,sumLahom,farq);
 
  if(localStorage.length == 0){
@@ -63,35 +59,60 @@ console.log()
  let a = total.toString();
 
 this.currentJawlah = a ;
-console.log(isNaN(parseInt(this.currentJawlah)));
+
 }
 
 
-for (var i = 0; i < localStorage.length; i++){
+// for (var i = 0; i < localStorage.length; i++){
  
-   var all = (localStorage.key(i));
-if(all == 'null'){
-    var b ;
-    b = parseInt(this.currentJawlah) -1;
-    this.currentJawlah = b.toString();
-    console.log(this.currentJawlah)
-  console.log("hi");
+//    var all = (localStorage.key(i));
+// if(all == 'tasjilah'){
+//     var b ;
+//     b = parseInt(this.currentJawlah) -1;
+//     this.currentJawlah = b.toString();
+//    // console.log(this.currentJawlah)
+//   }
+
+// }
+ 
+
 }
 
-    console.log(all);
+ngDoCheck(){
+
+  if(localStorage.length == 0){
+    this.currentJawlah = '1';
+    }
+  else {
+  
+  var cv = localStorage.length;
+  console.log(cv);
+  var total = (cv + 1);
+  console.log()
+   let a = total.toString();
+  
+  this.currentJawlah = a ;
+  
   }
+  
+  for (var i = 0; i < localStorage.length; i++){
  
-
+    var all = (localStorage.key(i));
+ if(all == 'tasjilah'){
+     var b ;
+     b = parseInt(this.currentJawlah) -1;
+     this.currentJawlah = b.toString();
+    // console.log(this.currentJawlah)
+   }
+ 
+ }
 }
-
-
-
 
 async openModal() {
   const modal = await this.modalController.create({
     component: ModalPage,
     cssClass: 'my-custom-modal-css',
-  //  componentProps: { value: 123 }
+    componentProps: { currentvalue: this.currentJawlah }
   });
   return await modal.present();
 }
