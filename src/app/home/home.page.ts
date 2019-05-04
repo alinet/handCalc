@@ -10,6 +10,8 @@ import { REACTIVE_DRIVEN_DIRECTIVES } from '@angular/forms/src/directives';
 import { Directive } from '@angular/core';
 import { ngfactoryFilePath } from '@angular/compiler/src/aot/util';
 import { ReturnStatement } from '@angular/compiler';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+import { EventListener } from '@angular/core/src/debug/debug_node';
 
 @Component({
   selector: 'app-home',
@@ -18,94 +20,74 @@ import { ReturnStatement } from '@angular/compiler';
 })
 export class HomePage {
 @Input () currentJawlah: string;
+@Input () farq: number;
+@Input () jawlahNo: string;
+@Input ()jawlats:any[];
 
 constructor(private modalController: ModalController) {
-this.currentJawlah ;
+this.currentJawlah ='1';
+this.jawlahNo ='1';
+this.farq = 0;
+
+
 
 }
 
 ngOnInit() {
 
-
-  var sumLana = 0;
-  var sumLahom =0;
-  var farq = 0;
   for (var i = 0; i < localStorage.length; i++){
-   // console.log(localStorage.getItem(localStorage.key(i)));
-   
-   // console.log(localStorage.getItem(localStorage.key(i)));
-   
-    var all = (localStorage.key(i));
-   var myall = JSON.parse(localStorage.getItem(all));
-   const sumLanaVal = myall[2];
-   const sumLahomVal = myall[3];
-  sumLana += sumLanaVal;
-  sumLahom += sumLahomVal;
-  farq = sumLahom - sumLana;
- 
+  var all = (localStorage.key(i));
+  let myalls = JSON.parse(localStorage.getItem(all));
+ this.jawlats = myalls;
+  //this.currentJawlah = '1';
  }
- 
- console.log(sumLana,sumLahom,farq);
-
- if(localStorage.length == 0){
-  this.currentJawlah = '1';
-  }
-else {
-
-var cv = localStorage.length;
-console.log(cv);
-var total = (cv + 1);
-console.log()
- let a = total.toString();
-
-this.currentJawlah = a ;
-
-}
-
-
-// for (var i = 0; i < localStorage.length; i++){
- 
-//    var all = (localStorage.key(i));
-// if(all == 'tasjilah'){
-//     var b ;
-//     b = parseInt(this.currentJawlah) -1;
-//     this.currentJawlah = b.toString();
-//    // console.log(this.currentJawlah)
-//   }
-
-// }
- 
-
 }
 
 ngDoCheck(){
 
-  if(localStorage.length == 0){
+  
+  var all = (localStorage.key(i));
+  let myalls = JSON.parse(localStorage.getItem(all));
+
+  if( myalls.length == 'null'){
     this.currentJawlah = '1';
     }
   else {
+  this.currentJawlah = myalls.length + 1;
   
-  var cv = localStorage.length;
-  console.log(cv);
-  var total = (cv + 1);
-  console.log()
-   let a = total.toString();
-  
-  this.currentJawlah = a ;
+  //console.log(this.currentJawlah);
   
   }
   
   for (var i = 0; i < localStorage.length; i++){
- 
-    var all = (localStorage.key(i));
+   var all = (localStorage.key(i));
  if(all == 'tasjilah'){
      var b ;
      b = parseInt(this.currentJawlah) -1;
      this.currentJawlah = b.toString();
-    // console.log(this.currentJawlah)
+   
    }
- 
+   
  }
+  // for (var i = 0; i < localStorage.length; i++){
+  //    let all = (localStorage.key(i));
+  //   let myalls = JSON.parse(localStorage.getItem(localStorage.getItem(all)));
+  //   //
+  //   }
+
+ // this.jawlats = myalls;
+if (this.jawlats == [null] || this.jawlats == [0]){
+   
+}
+
+ var lanaTotal = myalls.reduce(function(prev, cur) {  
+  return prev + cur.lanaVal;
+}, 0);
+var lahomTotal = myalls.reduce(function(prev, cur) {  
+  return prev + cur.lahomVal;
+}, 0);
+
+this.farq = Math.abs(Math.abs(lanaTotal) - Math.abs(lahomTotal));
 }
 
 async openModal() {
@@ -118,6 +100,7 @@ async openModal() {
 }
 async clearLocalForge(){
 localStorage.clear();
+
 
 }
 

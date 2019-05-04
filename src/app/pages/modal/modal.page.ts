@@ -9,6 +9,7 @@ import { ValueAccessor } from '@ionic/angular/dist/directives/control-value-acce
 
 import { ngfactoryFilePath } from '@angular/compiler/src/aot/util';
 import { stringify } from '@angular/core/src/util';
+import { analyzeAndValidateNgModules } from '@angular/compiler';
 
 
 
@@ -27,22 +28,26 @@ export class ModalPage implements OnInit {
   lanaVal: number;
   lahomVal: number;
   isTasjilah: boolean;
- jawalinfo: any[];
+ jawalinfo: object;
  nazilCount: number;
   myForm: FormGroup;
   majmo: string;
   taVal: any;
+
+
    
   
 
   
   constructor(private modalController: ModalController, public fb: FormBuilder) {
+    
   }
   async closeModal() {
     const modal = await this.modalController.dismiss();
     return modal;
    }
   ngOnInit() {
+    
      this.myForm = this.fb.group({
      //winner : [''],
     });
@@ -67,7 +72,7 @@ export class ModalPage implements OnInit {
   
 onSubmit(): void {
  
-  var alength = localStorage.length;
+  //var alength = localStorage.length;
   
   
    
@@ -205,10 +210,30 @@ onSubmit(): void {
       this.isTasjilah = true;
     
     }
-
-
-   this.jawalinfo =[ this.jawlahNo, this.winnerTeam, this.lanaVal, this.lahomVal, this.isTasjilah];
-    localStorage.setItem(JSON.stringify(this.jawlahNo), JSON.stringify(this.jawalinfo));
+    this.jawalinfo = {
+      'jawlahNo': this.jawlahNo,
+      'winnerTeam': this.winnerTeam,
+      'lanaVal': this.lanaVal,
+      'lahomVal': this.lahomVal,
+      'isTasjilah': this.isTasjilah
+    }
+  //  console.log(this.jawalinfo)
+    //[this.jawlahNo,this.winnerTeam, this.lanaVal,this.lahomVal,this.isTasjilah];
+    
+    
+    
+   // localStorage.setItem('1',JSON.stringify(this.jawalinfo));
+   
+   var a;
+  
+   if (localStorage.getItem('jawlats') === null) {
+       a = [];
+   } else {
+        a = JSON.parse(localStorage.getItem('jawlats'));
+    }
+    a.push(this.jawalinfo);
+    localStorage.setItem('jawlats', JSON.stringify(a));
+console.log(this.currentvalue);
    }
 }
 

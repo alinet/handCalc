@@ -15,7 +15,7 @@
  
   <ion-item color="Primary" lines="none" class="jawlhcard">
       <ion-label color="danger">
-          <h2>270</h2>
+          <h2>{{ farq }}</h2>
         </ion-label>
      </ion-item>
   
@@ -37,30 +37,31 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content padding >
    
-    <ion-content>
-        <ion-card class="jawlhcard">
+    <ion-content *ngIf="jawlats" >
+      
+        <ion-card class="jawlhcard"  *ngFor="let jawlat of jawlats" >
           
           <ion-card-header color="primary">
             
-            <ion-card-title >الجولة :  2</ion-card-title>
+            <ion-card-title >الجولة : {{ jawlat.jawlahNo }}</ion-card-title>
            
         </ion-card-header>
           <ion-item class="jawlhcard">
-            <ion-label>الفرق</ion-label>
+         
             <ion-label>لهم</ion-label>
             <ion-label>لنا</ion-label>
           </ion-item>
       
           <ion-item lines=none class="jawlhcard">
-            <ion-label>270</ion-label>
-            <ion-label>-30</ion-label>
-            <ion-label>300</ion-label>
+            <ion-label>{{jawlat.lahomVal}}</ion-label>
+            <ion-label>{{jawlat.lanaVal}}</ion-label>
           </ion-item>
           
         </ion-card>
       </ion-content>
+      
       
   </ion-content>
 
