@@ -1,4 +1,4 @@
-import { Component, OnInit, Injectable, ViewChild } from '@angular/core';
+import { Component, OnInit, Injectable, ViewChild, Output } from '@angular/core';
 import { ModalController, IonSelectOption, IonItemOption, IonSelect, IonInput } from '@ionic/angular';
 import { RadioControlRegistry, RADIO_VALUE_ACCESSOR } from '@angular/forms/src/directives/radio_control_value_accessor';
 import {  FormsModule, FormBuilder, FormGroup, ReactiveFormsModule, FormControl, Form, Validators } from '@angular/forms';
@@ -6,11 +6,11 @@ import { REACTIVE_DRIVEN_DIRECTIVES } from '@angular/forms/src/directives';
 import { Directive } from '@angular/core';
 import { element } from '@angular/core/src/render3';
 import { ValueAccessor } from '@ionic/angular/dist/directives/control-value-accessors/value-accessor';
-
 import { ngfactoryFilePath } from '@angular/compiler/src/aot/util';
 import { stringify } from '@angular/core/src/util';
 import { analyzeAndValidateNgModules } from '@angular/compiler';
-
+import { JawlatsDataService } from 'src/app/jawlats-data.service';
+import { EventListener } from '@angular/core/src/debug/debug_node';
 
 
 @Component({
@@ -21,6 +21,7 @@ import { analyzeAndValidateNgModules } from '@angular/compiler';
 })
 
 export class ModalPage implements OnInit {
+  
   currentvalue;
  jawlahNo: string;
  winnerTeam: string;
@@ -33,13 +34,11 @@ export class ModalPage implements OnInit {
   myForm: FormGroup;
   majmo: string;
   taVal: any;
-
-
-   
+  jawlats;
   
 
   
-  constructor(private modalController: ModalController, public fb: FormBuilder) {
+  constructor(private modalController: ModalController,private jawService:JawlatsDataService) {
     
   }
   async closeModal() {
@@ -47,11 +46,12 @@ export class ModalPage implements OnInit {
     return modal;
    }
   ngOnInit() {
-    
-     this.myForm = this.fb.group({
-     //winner : [''],
-    });
-    console.log(this.currentvalue);
+   // this.jawlats = this.jawService.getJawlats();
+ 
+    //  this.myForm = this.fb.group({
+    //  //winner : [''],
+    // });
+    // console.log(this.currentvalue);
   }
 
   teamValue(event)
@@ -71,7 +71,8 @@ export class ModalPage implements OnInit {
   }
   
 onSubmit(): void {
- 
+  const modal = this.modalController.dismiss();
+  
   //var alength = localStorage.length;
   
   
@@ -233,8 +234,12 @@ onSubmit(): void {
     }
     a.push(this.jawalinfo);
     localStorage.setItem('jawlats', JSON.stringify(a));
-console.log(this.currentvalue);
+    console.log(this.currentvalue);
+
+   // window.location.reload();
+   
    }
+   
 }
 
 
