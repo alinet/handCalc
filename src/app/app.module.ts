@@ -10,11 +10,13 @@ import { AppRoutingModule } from './app-routing.module';
 import { ModalPageModule } from './pages/modal/modal.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ModalPage } from './pages/modal/modal.page';
+import { IonicStorageModule } from '@ionic/storage';
 
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, ModalPageModule, FormsModule, ReactiveFormsModule ],
+  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, ModalPageModule, FormsModule, 
+    ReactiveFormsModule, IonicStorageModule.forRoot() ],
   providers: [
     StatusBar,
     SplashScreen,

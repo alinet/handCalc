@@ -11,7 +11,9 @@ import { stringify } from '@angular/core/src/util';
 import { analyzeAndValidateNgModules } from '@angular/compiler';
 import { JawlatsDataService } from 'src/app/jawlats-data.service';
 import { EventListener } from '@angular/core/src/debug/debug_node';
-
+import { Subscriber } from 'rxjs';
+import { delay } from 'q';
+import { LocalStorage } from '@ngx-pwa/local-storage';
 
 @Component({
   selector: 'app-modal',
@@ -38,13 +40,10 @@ export class ModalPage implements OnInit {
   
 
   
-  constructor(private modalController: ModalController,private jawService:JawlatsDataService) {
+  constructor(private modalController: ModalController, private jawService: JawlatsDataService) {
     
   }
-  async closeModal() {
-    const modal = await this.modalController.dismiss();
-    return modal;
-   }
+ 
   ngOnInit() {
    // this.jawlats = this.jawService.getJawlats();
  
@@ -70,13 +69,13 @@ export class ModalPage implements OnInit {
      
   }
   
-onSubmit(): void {
-  const modal = this.modalController.dismiss();
+  closeModal(): void {
+   const modal = this.modalController.dismiss();
+  }  
+//   //var alength = localStorage.length;
   
-  //var alength = localStorage.length;
+async onSubmit() {
   
-  
-   
   
     //team lana 
      if(this.winnerTeam == 'lana' && this.winType == 'khlosSafi'){
@@ -89,14 +88,12 @@ onSubmit(): void {
       this.isTasjilah = false;
     }
     else if(this.winnerTeam =='lana' && this.winType == 'dabalSafi'){
-      // if (alength== 0) {this.jawlahNo += 1; } else { this.jawlahNo += 1; }
       this.jawlahNo = this.currentvalue;
       this.lanaVal = -60;
       this.lahomVal = 600;
       this.isTasjilah = false;
     } 
     else if(this.winnerTeam =='lana' && this.winType == 'khlos'){
-      // if (alength== 0) {this.jawlahNo = 0;this.jawlahNo += 1; } else {this.jawlahNo +=1}
       this.jawlahNo = this.currentvalue;
       this.lanaVal = -30;
 
@@ -218,28 +215,20 @@ onSubmit(): void {
       'lahomVal': this.lahomVal,
       'isTasjilah': this.isTasjilah
     }
-  //  console.log(this.jawalinfo)
-    //[this.jawlahNo,this.winnerTeam, this.lanaVal,this.lahomVal,this.isTasjilah];
-    
-    
-    
-   // localStorage.setItem('1',JSON.stringify(this.jawalinfo));
-   
-   var a;
+   let a;
   
-   if (localStorage.getItem('jawlats') === null) {
        a = [];
-   } else {
-        a = JSON.parse(localStorage.getItem('jawlats'));
-    }
+  
     a.push(this.jawalinfo);
-    localStorage.setItem('jawlats', JSON.stringify(a));
-    console.log(this.currentvalue);
-
-   // window.location.reload();
-   
+    this.jawService.createJawlah(a);
+   //this.jawService.jawlats.push(a);
+    let modal = await this.modalController.dismiss();
+    return modal;
+    
    }
    
+  
+
 }
 
 

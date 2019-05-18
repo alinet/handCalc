@@ -1,6 +1,6 @@
 import { stringify } from 'querystring';
-import { Component, Input, Output, DoCheck, NgZone } from '@angular/core';
-import { NavController, ModalController } from '@ionic/angular';
+import { Component, Input, Output, DoCheck, NgZone, IterableDiffers } from '@angular/core';
+import { NavController, ModalController, Events } from '@ionic/angular';
 import { ModalPage } from '../pages/modal/modal.page';
 import {  OnInit, Injectable } from '@angular/core';
 import {  IonSelectOption, IonItemOption, IonSelect } from '@ionic/angular';
@@ -11,9 +11,14 @@ import { Directive } from '@angular/core';
 import { ngfactoryFilePath } from '@angular/compiler/src/aot/util';
 import { ReturnStatement } from '@angular/compiler';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
-import { EventListener } from '@angular/core/src/debug/debug_node';
+import { EventListener, getAllDebugNodes } from '@angular/core/src/debug/debug_node';
 import { JawlatsDataService } from '../jawlats-data.service';
 import { Subscriber } from 'rxjs';
+import { Observable, observable } from 'rxjs';
+import { detectChangesInRootView } from '@angular/core/src/render3/instructions';
+
+import { LocalStorage } from '@ngx-pwa/local-storage';
+
 
 @Component({
   selector: 'app-home',
@@ -21,50 +26,70 @@ import { Subscriber } from 'rxjs';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage implements OnInit, DoCheck{
-@Input () currentJawlah: string;
+@Input () currentJawlah: number;
 @Input () farq: number;
-@Input () jawlahNo: string;
- jawlats ;
-constructor(private modalController: ModalController, private jawService: JawlatsDataService) {
-this.currentJawlah = '1';
-this.jawlahNo = '1';
+@Input () jawlahNo: number;
+ jawlats;
+  
+ 
+ 
+constructor(private modalController: ModalController, public jawService: JawlatsDataService,
+  protected localStorage: LocalStorage) {
+this.currentJawlah = 1;
+this.jawlahNo = 1;
 this.farq = 0;
 
 }
+
+ngOnChanges(){
+  
+ 
+ 
+}
+
  ngOnInit() {
-this.jawlats = this.jawService.getJawlats();
+  
+ 
+  this.localStorage.getItem<'jawlats'>('jawlats').subscribe((data) => {
+   this.jawlats = data;
+   console.log(this.jawlats);
+});
+this.jawlats
 
+
+
+ //this.jawService.getJawlatsLength();
+ 
 }
-
-
 ngDoCheck(){
-//  this.jawlats;
-   if( this.jawlats.length == 'null' || this.jawlats.length == 0){
-     this.currentJawlah = '1';
-    
+  
+  this.localStorage.getItem<'jawlats'>('jawlats').subscribe((data) => {
+    if(this.jawlats !== data){
+      this.jawlats = data;
+
     }
-   else {
-  this.currentJawlah = this.jawlats.length + 1;
-  
-  //console.log(this.currentJawlah);
-  
-  
-
-  
-  var lanaTotal = this.jawlats.reduce(function(prev, cur) {  
-  return prev + cur.lanaVal;
-  }, 0);
-  var lahomTotal = this.jawlats.reduce(function(prev, cur) {  
-  return prev + cur.lahomVal;
-  }, 0);
-  
-  this.farq = Math.abs(Math.abs(lanaTotal) - Math.abs(lahomTotal));
+ });
 
 
- }
+
+    //  if( sz == null ) {
+    //   this.currentJawlah = 1; 
+    // }
+    //  else{
+    //   this.currentJawlah += 1;
+    //  }
+  }
+
+//  var lanaTotal = this.jawlats.reduce(function(prev, cur) {  
+//   return prev + cur.lanaVal;
+//   }, 0);
+//   var lahomTotal = this.jawlats.reduce(function(prev, cur) {  
+//   return prev + cur.lahomVal;
+//   }, 0);
+  
+//   this.farq = Math.abs(Math.abs(lanaTotal) - Math.abs(lahomTotal));
 
 
-}
 
 
 async openModal() {
@@ -73,10 +98,16 @@ async openModal() {
     cssClass: 'my-custom-modal-css',
     componentProps: { currentvalue: this.currentJawlah }
   });
+  
+   
   return await modal.present();
 }
+
+async closeModal(){
+  const modal = await this.modalController.dismiss();
+}
 async clearLocalForge(){
-localStorage.clear();
+  this.localStorage.clear();
 
 
 
