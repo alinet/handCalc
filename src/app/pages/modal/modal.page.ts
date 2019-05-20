@@ -40,7 +40,8 @@ export class ModalPage implements OnInit {
   
 
   
-  constructor(private modalController: ModalController, private jawService: JawlatsDataService) {
+  constructor(private modalController: ModalController, private jawService: JawlatsDataService
+    ,protected localStorage: LocalStorage) {
     
   }
  
@@ -215,20 +216,13 @@ async onSubmit() {
       'lahomVal': this.lahomVal,
       'isTasjilah': this.isTasjilah
     }
-   let a;
-  
-       a = [];
-  
+     let a = [];
+    // a = this.jawalinfo;
     a.push(this.jawalinfo);
     this.jawService.createJawlah(a);
-   //this.jawService.jawlats.push(a);
     let modal = await this.modalController.dismiss();
     return modal;
-    
    }
-   
-  
-
-}
+  }
 
 

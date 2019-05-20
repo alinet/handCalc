@@ -49,35 +49,28 @@ ngOnChanges(){
 
  ngOnInit() {
   
- 
-  this.localStorage.getItem<'jawlats'>('jawlats').subscribe((data) => {
-   this.jawlats = data;
+  
+  this.localStorage.getItem<[]>('jawlats').subscribe((data) => {
+  if(this.jawlats != data)
+   {this.jawlats = data;}
+
    console.log(this.jawlats);
 });
-this.jawlats
 
-
-
- //this.jawService.getJawlatsLength();
  
+this.jawlats = this.jawService.getJawlats()
 }
 ngDoCheck(){
-  
-  this.localStorage.getItem<'jawlats'>('jawlats').subscribe((data) => {
-    if(this.jawlats !== data){
+  this.localStorage.getItem<'jawlats'>('jawlats').subscribe((data:[]) => {
+    // if(this.jawlats !== data){
       this.jawlats = data;
-
-    }
- });
-
-
-
-    //  if( sz == null ) {
-    //   this.currentJawlah = 1; 
-    // }
-    //  else{
-    //   this.currentJawlah += 1;
-    //  }
+  
+    
+  });
+ this.currentJawlah = this.jawService.getJawlatsLength() + 1;
+  
+ 
+   
   }
 
 //  var lanaTotal = this.jawlats.reduce(function(prev, cur) {  
@@ -106,11 +99,11 @@ async openModal() {
 async closeModal(){
   const modal = await this.modalController.dismiss();
 }
-async clearLocalForge(){
-  this.localStorage.clear();
-
-
-
+async clearmystorage(){
+//this.localStorage.clear();
+//this.jawService.clearJawlat();
+this.localStorage.clear().subscribe(() => {});
+console.log('clicked');
 }
 
 
