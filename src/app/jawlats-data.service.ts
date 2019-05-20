@@ -37,3 +37,6 @@ return this.jawlats;
       }
 
     }
+
+
+    // check this out https://itnext.io/pwa-from-scratch-guide-yet-another-one-bdfa438b50aa
