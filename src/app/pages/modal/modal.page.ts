@@ -13,7 +13,7 @@ import { JawlatsDataService } from 'src/app/jawlats-data.service';
 import { EventListener } from '@angular/core/src/debug/debug_node';
 import { Subscriber } from 'rxjs';
 import { delay } from 'q';
-import { LocalStorage } from '@ngx-pwa/local-storage';
+
 
 @Component({
   selector: 'app-modal',
@@ -24,8 +24,8 @@ import { LocalStorage } from '@ngx-pwa/local-storage';
 
 export class ModalPage implements OnInit {
   
-  currentvalue;
- jawlahNo: string;
+  currentvalue: number;
+ jawlahNo: number;
  winnerTeam: string;
   winType: string;
   lanaVal: number;
@@ -36,22 +36,17 @@ export class ModalPage implements OnInit {
   myForm: FormGroup;
   majmo: string;
   taVal: any;
-  jawlats;
+  
   
 
   
   constructor(private modalController: ModalController, private jawService: JawlatsDataService
-    ,protected localStorage: LocalStorage) {
+    ) {
     
   }
  
   ngOnInit() {
-   // this.jawlats = this.jawService.getJawlats();
- 
-    //  this.myForm = this.fb.group({
-    //  //winner : [''],
-    // });
-    // console.log(this.currentvalue);
+   
   }
 
   teamValue(event)
@@ -180,14 +175,14 @@ async onSubmit() {
   }
 
     else if (this.winnerTeam == 'lana' && this.winType == 'tasjilahKhlos'){
-      this.jawlahNo = 'tasjilah';
+      this.jawlahNo = this.currentvalue;
       this.lanaVal = 0;
       this.lahomVal = 300;
       this.isTasjilah = true;
     
     }
     else if (this.winnerTeam == 'lana' && this.winType == 'tasjilahDabal'){
-      this.jawlahNo = 'tasjilah';
+      this.jawlahNo = this.currentvalue;
       this.lanaVal = 0;
       this.lahomVal = 600;
       this.isTasjilah = true;
@@ -196,14 +191,14 @@ async onSubmit() {
 
     else if (this.winnerTeam == 'lahom' && this.winType == 'tasjilahKhlos'){
       this.taVal += 1;
-      this.jawlahNo = 'tasjilah' + this.taVal;
+      this.jawlahNo = this.currentvalue;
       this.lanaVal = 300;
       this.lahomVal = 0;
       this.isTasjilah = true;
     
     }
     else if (this.winnerTeam == 'lahom' && this.winType == 'tasjilahDabal'){
-      this.jawlahNo = 'tasjilah';
+      this.jawlahNo = this.currentvalue
       this.lanaVal = 600;
       this.lahomVal = 0;
       this.isTasjilah = true;
@@ -216,10 +211,11 @@ async onSubmit() {
       'lahomVal': this.lahomVal,
       'isTasjilah': this.isTasjilah
     }
-     let a = [];
-    // a = this.jawalinfo;
-    a.push(this.jawalinfo);
-    this.jawService.createJawlah(a);
+   //  let a = []
+     // a.push(this.jawalinfo);
+      
+    this.jawService.createJawlah(this.jawalinfo);
+   
     let modal = await this.modalController.dismiss();
     return modal;
    }

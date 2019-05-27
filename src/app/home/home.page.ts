@@ -14,10 +14,9 @@ import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { EventListener, getAllDebugNodes } from '@angular/core/src/debug/debug_node';
 import { JawlatsDataService } from '../jawlats-data.service';
 import { Subscriber } from 'rxjs';
-import { Observable, observable } from 'rxjs';
+import { Observable, observable ,of } from 'rxjs';
 import { detectChangesInRootView } from '@angular/core/src/render3/instructions';
 
-import { LocalStorage } from '@ngx-pwa/local-storage';
 
 
 @Component({
@@ -26,7 +25,7 @@ import { LocalStorage } from '@ngx-pwa/local-storage';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage implements OnInit, DoCheck{
-@Input () currentJawlah: number;
+currentJawlah: number;
 @Input () farq: number;
 @Input () jawlahNo: number;
  jawlats;
@@ -34,56 +33,28 @@ export class HomePage implements OnInit, DoCheck{
  
  
 constructor(private modalController: ModalController, public jawService: JawlatsDataService,
-  protected localStorage: LocalStorage) {
+  ) {
 this.currentJawlah = 1;
-this.jawlahNo = 1;
+this.jawlahNo = this.currentJawlah;
 this.farq = 0;
+this.jawService.createDB();
 
 }
-
-ngOnChanges(){
-  
- 
- 
-}
-
  ngOnInit() {
-  
-  
-  this.localStorage.getItem<[]>('jawlats').subscribe((data) => {
-  if(this.jawlats != data)
-   {this.jawlats = data;}
-
-   console.log(this.jawlats);
-});
-
- 
-this.jawlats = this.jawService.getJawlats()
+  this.currentJawlah = 1;
 }
 ngDoCheck(){
-  this.localStorage.getItem<'jawlats'>('jawlats').subscribe((data:[]) => {
-    // if(this.jawlats !== data){
-      this.jawlats = data;
-  
-    
-  });
- this.currentJawlah = this.jawService.getJawlatsLength() + 1;
-  
- 
-   
+  if(this.currentJawlah >= 1){
+    this.currentJawlah = this.jawService.jawlats.length + 1;
   }
-
-//  var lanaTotal = this.jawlats.reduce(function(prev, cur) {  
-//   return prev + cur.lanaVal;
-//   }, 0);
-//   var lahomTotal = this.jawlats.reduce(function(prev, cur) {  
-//   return prev + cur.lahomVal;
-//   }, 0);
-  
-//   this.farq = Math.abs(Math.abs(lanaTotal) - Math.abs(lahomTotal));
-
-
-
+  var lanaTotal = this.jawService.jawlats.reduce(function(prev, cur) {  
+    return prev + cur.values.lanaVal;
+    }, 0);
+    var lahomTotal = this.jawService.jawlats.reduce(function(prev, cur) {  
+      return prev + cur.values.lahomVal;
+      }, 0);
+      this.farq = Math.abs(Math.abs(lanaTotal) - Math.abs(lahomTotal));
+  }
 
 async openModal() {
   const modal = await this.modalController.create({
@@ -91,8 +62,6 @@ async openModal() {
     cssClass: 'my-custom-modal-css',
     componentProps: { currentvalue: this.currentJawlah }
   });
-  
-   
   return await modal.present();
 }
 
@@ -100,10 +69,8 @@ async closeModal(){
   const modal = await this.modalController.dismiss();
 }
 async clearmystorage(){
-//this.localStorage.clear();
-//this.jawService.clearJawlat();
-this.localStorage.clear().subscribe(() => {});
-console.log('clicked');
+this.jawService.ClearData();
+this.currentJawlah = 1;
 }
 
 

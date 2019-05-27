@@ -1,42 +1,76 @@
 import { Injectable } from '@angular/core';
 import { promisify } from 'util';
-import { LocalStorage } from '@ngx-pwa/local-storage';
-import { Observable } from 'rxjs';
-
-
+import { Observable, empty } from 'rxjs';
+import { NgxIndexedDB } from 'ngx-indexed-db';
 
 @Injectable({
   providedIn: 'root'
 })
 export class JawlatsDataService {
-  public jawlats;
+  public jawlats = [];
   public values;
-  public size:number;
-  constructor(protected localStorage: LocalStorage) 
+ 
+    handDB = new  NgxIndexedDB('handData', 1);
+
+  constructor() 
   { console.log('Jawlats Service Works');}
-  getJawlatsLength (){
-    this.localStorage.size.subscribe((size) => {
-   this.size = size;
-    });
-    return this.size;
+
+  createDB(){
+    this.handDB.openDatabase(1, evt => {
+      let objectStore = evt.currentTarget.result.createObjectStore('jawlatData', { keyPath: 'id', autoIncrement: true});
+      console.log('table creared and Open');
+   });
   }
 
-  getJawlats() {
- this.localStorage.getItem<[]>('jawlats').subscribe((data) => {
-  this.jawlats = data;
-});
-
-return this.jawlats;
-  }
-
-  createJawlah(values){
-    this.localStorage.setItem('jawlats',values).subscribe(() => {
-          
-      console.log(values);
-     });
-      }
-
+  getJawlat() {
+    this.handDB.openDatabase(1, evt => {
+      let objectStore = evt.currentTarget.result.createObjectStore('jawlatData', { keyPath: 'id', autoIncrement: true});
+      console.log('table creared and Open');
+   }).then(() =>
+    this.handDB.getAll('jawlatData').then(
+      (ja) => {
+        this.jawlats = ja;
+        return this.jawlats
+    },
+       error => {
+           console.log(error);
+       }
+   ));
     }
 
 
-    // check this out https://itnext.io/pwa-from-scratch-guide-yet-another-one-bdfa438b50aa
+
+  createJawlah(values){
+    this.handDB.add('jawlatData', { values }).then(
+      () => {
+         console.log('added complete')
+         this.handDB.getAll('jawlatData').then(
+          (ja) => {
+            this.jawlats = ja;
+          
+      },
+      error => {
+          console.log(error);
+      }
+        );
+    });
+    };
+currentJawlah(){
+ 
+}
+
+
+  ClearData(){
+    this.handDB.clear('jawlatData').then(
+      () => {
+          console.log('Cleared');
+          this.jawlats = [];
+          this.jawlats.pop();
+      },
+      error => {
+          console.log(error);
+        }
+          );
+        }
+  }
+

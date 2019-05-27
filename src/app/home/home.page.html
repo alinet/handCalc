@@ -6,10 +6,10 @@
   </ion-toolbar>
   <ion-item color="Primary" lines="none" class="jawlhcard">
     <ion-label>
-      <h2>لهم</h2>
+      <h1>لهم</h1>
     </ion-label>
     <ion-label color="primary">
-      <h2>لنا</h2>
+      <h1>لنا</h1>
     </ion-label>
   </ion-item>
  
@@ -21,7 +21,7 @@
   
      <ion-item color="Primary" lines="none" class="jawlhcard">
         <ion-label color="medium">
-            <h2>الفرق اقل من خلوص</h2>
+          
           </ion-label>
        </ion-item>
     
@@ -41,11 +41,11 @@
    
     <ion-content>
       
-        <ion-card class="jawlhcard"  *ngFor="let jawlat of jawlats">
+        <ion-card class="jawlhcard"  *ngFor="let jawlat of jawService.jawlats">
           
           <ion-card-header color="primary">
           
-            <ion-card-title >الجولة : {{ jawlat.jawlahNo }}</ion-card-title>
+            <ion-card-title >الجولة : {{ jawlat.values.jawlahNo }}</ion-card-title>
            
         </ion-card-header>
           <ion-item class="jawlhcard">
@@ -55,8 +55,8 @@
           </ion-item>
       
           <ion-item lines=none class="jawlhcard">
-            <ion-label>{{jawlat.lahomVal}}</ion-label>
-            <ion-label>{{jawlat.lanaVal}}</ion-label>
+            <ion-label>{{jawlat.values.lahomVal}}</ion-label>
+            <ion-label>{{jawlat.values.lanaVal}}</ion-label>
           </ion-item>
           
         </ion-card>
