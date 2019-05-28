@@ -9,10 +9,8 @@ import { NgxIndexedDB } from 'ngx-indexed-db';
 export class JawlatsDataService {
   public jawlats = [];
   public values;
- 
-    handDB = new  NgxIndexedDB('handData', 1);
-
-  constructor() 
+  handDB = new  NgxIndexedDB('handData', 1);
+ constructor() 
   { console.log('Jawlats Service Works');}
 
   createDB(){
@@ -38,8 +36,6 @@ export class JawlatsDataService {
    ));
     }
 
-
-
   createJawlah(values){
     this.handDB.add('jawlatData', { values }).then(
       () => {
@@ -55,11 +51,6 @@ export class JawlatsDataService {
         );
     });
     };
-currentJawlah(){
- 
-}
-
-
   ClearData(){
     this.handDB.clear('jawlatData').then(
       () => {
