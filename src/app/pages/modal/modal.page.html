@@ -7,9 +7,7 @@
      <ion-col size="10" style="display:flex;align-items: center;justify-content: center;text-align: center;">
      <h1> اضافة جولة </h1> </ion-col>
      <ion-col size="2" style="padding-top:10px;">
-    <ion-button fill="outline" float-right (click)="closeModal()"> 
-        <ion-icon name="close"></ion-icon>
-      </ion-button>
+    
     </ion-col>
     </ion-row>
   </ion-toolbar>
@@ -18,7 +16,7 @@
 <ion-content >
 
     <ion-grid >
-    <ion-radio-group (ionChange)="teamValue($event)" style="vertical-align: middle;justify-content: center;display: flex;align-items: center;"> 
+    <ion-radio-group required (ionChange)="teamValue($event)" style="vertical-align: middle;justify-content: center;display: flex;align-items: center;"> 
     
   <ion-row>
 
@@ -109,8 +107,6 @@
 </ion-grid>
       
 <ion-grid>
-   
-    
   <ion-row align-items-center>
       <ion-col>
         <ion-item>
@@ -133,15 +129,21 @@
   <ion-col> 
   <ion-item>
   <ion-label text-right position="floating">المجموع</ion-label>
-  <ion-input text-right color="primary" type="number"  value="" (ionInput)="majmoValue($event)"></ion-input>
+  <ion-input text-right color="primary" type="number" maxlength="3"  value="" (ionInput)="majmoValue($event)"></ion-input>
 </ion-item>
 </ion-col>
 </ion-row>    
 </ion-grid>
 
 </ion-content>
-<ion-footer>
-
- <ion-button (click)="onSubmit()" style="width: 50%; height:50px;"> أضافة </ion-button>
-
+<ion-footer class="jawlhcard">
+   
+      <ion-button (click)="closeModal()" color="danger" style="width: 45%; height:50px;">
+          إلغاء        <ion-icon name="close" style="padding-left:7px;"></ion-icon>    
+                 </ion-button>
+    
+                 <ion-button (click)="onSubmit()" color="primary" style="width: 45%;height:50px;"> أضافة 
+                    <ion-icon name="add" style="padding-left:7px;">  </ion-icon>
+                    </ion-button>
+                  
 </ion-footer>

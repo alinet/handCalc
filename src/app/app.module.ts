@@ -18,7 +18,8 @@ import { environment } from '../environments/environment';
   declarations: [AppComponent],
   entryComponents: [],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, ModalPageModule, FormsModule, 
-    ReactiveFormsModule, IonicStorageModule.forRoot(), ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }) ],
+    ReactiveFormsModule, IonicStorageModule.forRoot(),
+     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }) ],
   providers: [
     StatusBar,
     SplashScreen,

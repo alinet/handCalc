@@ -16,6 +16,7 @@ import { JawlatsDataService } from '../jawlats-data.service';
 import { Subscriber } from 'rxjs';
 import { Observable, observable ,of } from 'rxjs';
 import { detectChangesInRootView } from '@angular/core/src/render3/instructions';
+import { AlertController } from '@ionic/angular';
 
 
 
@@ -33,7 +34,7 @@ currentJawlah: number;
  
  
 constructor(private modalController: ModalController, public jawService: JawlatsDataService,
-  ) {
+ public alertController: AlertController ) {
 this.currentJawlah = 1;
 this.jawlahNo = this.currentJawlah;
 this.farq = 0;
@@ -69,8 +70,30 @@ async closeModal(){
   const modal = await this.modalController.dismiss();
 }
 async clearmystorage(){
-this.jawService.ClearData();
-this.currentJawlah = 1;
+  const alert = await this.alertController.create({
+    header: 'لعبة جديدة',
+    message: '<strong>هل انت متاكد ؟ </strong>',
+    buttons: [
+      {
+        text: 'لا',
+        role: 'cancel',
+        cssClass: 'secondary',
+        handler: (blah) => {
+         // console.log('Confirm Cancel: blah');
+        }
+      }, {
+        text: 'نعم',
+        handler: () => {
+           this.jawService.ClearData();
+          this.currentJawlah = 1;  
+         // console.log('Confirm Okay');
+        }
+      }
+    ]
+  });
+
+  await alert.present();
+ 
 }
 
 

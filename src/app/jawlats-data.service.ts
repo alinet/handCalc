@@ -62,6 +62,10 @@ export class JawlatsDataService {
           console.log(error);
         }
           );
+
+      
         }
+
+       
   }
 

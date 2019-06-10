@@ -24,62 +24,36 @@ import { delay } from 'q';
 
 export class ModalPage implements OnInit {
   
-  currentvalue: number;
+currentvalue: number;
  jawlahNo: number;
  winnerTeam: string;
-  winType: string;
-  lanaVal: number;
-  lahomVal: number;
-  isTasjilah: boolean;
+ winType: string;
+ lanaVal: number;
+ lahomVal: number;
+ isTasjilah: boolean;
  jawalinfo: object;
  nazilCount: number;
-  myForm: FormGroup;
-  majmo: string;
-  taVal: any;
+ myForm: FormGroup;
+ majmo: string;
+ taVal: any;
   
-  
-
-  
-  constructor(private modalController: ModalController, private jawService: JawlatsDataService
-    ) {
-    
-  }
+  constructor(private modalController: ModalController, private jawService: JawlatsDataService) { }
  
-  ngOnInit() {
-   
-  }
+  ngOnInit() {}
 
-  teamValue(event)
-  {this.winnerTeam = event.detail.value;  }
+  teamValue(event) {this.winnerTeam = event.detail.value; }
+  winnerValue(event) { this.winType = event.detail.value; }
+  nazilValue(event) { this.nazilCount = event.detail.value; }
 
-  winnerValue(event)
-  { this.winType = event.detail.value;}
+  majmoValue(event){this.majmo = event.target.value; }
 
-  nazilValue(event) {
-    this.nazilCount = event.detail.value;
-    //console.log(this.nazilCount);
-  }
+  closeModal(): void {const modal = this.modalController.dismiss(); }  
 
-  majmoValue(event){
-   this.majmo = event.target.value;
-     
-  }
-  
-  closeModal(): void {
-   const modal = this.modalController.dismiss();
-  }  
-//   //var alength = localStorage.length;
-  
-async onSubmit() {
-  
-  
+  async onSubmit() {
     //team lana 
      if(this.winnerTeam == 'lana' && this.winType == 'khlosSafi'){
-    //   if(alength == 0){ this.jawlahNo = 0; 
-    //     this.jawlahNo += 1; } 
-    //     else {this.jawlahNo +=1}
       this.jawlahNo = this.currentvalue;
-        this.lanaVal = -30;
+      this.lanaVal = -30;
       this.lahomVal = 300;
       this.isTasjilah = false;
     }
@@ -94,8 +68,7 @@ async onSubmit() {
       this.lanaVal = -30;
 
       if(this.nazilCount == 1){
-        
-	    this.lahomVal = (200 + parseInt(this.majmo,10));
+      this.lahomVal = (200 + parseInt(this.majmo,10));
     }
       else if (this.nazilCount ==2){
         this.lahomVal = 100 + parseInt(this.majmo,10)
@@ -157,7 +130,6 @@ async onSubmit() {
     this.isTasjilah = false;
   } 
   else if(this.winnerTeam =='lahom' && this.winType == 'dabal'){
-    // if (alength== 0) {this.jawlahNo = 0;this.jawlahNo += 1; } else {this.jawlahNo +=1}
     this.jawlahNo = this.currentvalue;
     this.lahomVal = -60;
 
@@ -179,14 +151,13 @@ async onSubmit() {
       this.lanaVal = 0;
       this.lahomVal = 300;
       this.isTasjilah = true;
-    
     }
+ 
     else if (this.winnerTeam == 'lana' && this.winType == 'tasjilahDabal'){
       this.jawlahNo = this.currentvalue;
       this.lanaVal = 0;
       this.lahomVal = 600;
       this.isTasjilah = true;
-    
     }
 
     else if (this.winnerTeam == 'lahom' && this.winType == 'tasjilahKhlos'){
@@ -195,7 +166,6 @@ async onSubmit() {
       this.lanaVal = 300;
       this.lahomVal = 0;
       this.isTasjilah = true;
-    
     }
     else if (this.winnerTeam == 'lahom' && this.winType == 'tasjilahDabal'){
       this.jawlahNo = this.currentvalue
@@ -211,13 +181,16 @@ async onSubmit() {
       'lahomVal': this.lahomVal,
       'isTasjilah': this.isTasjilah
     }
-   //  let a = []
-     // a.push(this.jawalinfo);
-      
-    this.jawService.createJawlah(this.jawalinfo);
+    
    
-    let modal = await this.modalController.dismiss();
-    return modal;
+      this.jawService.createJawlah(this.jawalinfo);
+      let modal = await this.modalController.dismiss();
+      return modal;
+   
+    
+
+  
+    
    }
   }
 
