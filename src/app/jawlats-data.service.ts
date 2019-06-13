@@ -7,7 +7,9 @@ import { NgxIndexedDB } from 'ngx-indexed-db';
   providedIn: 'root'
 })
 export class JawlatsDataService {
+  public allJawlat = [];
   public jawlats = [];
+  public tasjlat = [];
   public values;
   handDB = new  NgxIndexedDB('handData', 1);
  constructor() 
@@ -17,7 +19,7 @@ export class JawlatsDataService {
     this.handDB.openDatabase(1, evt => {
       let objectStore = evt.currentTarget.result.createObjectStore('jawlatData', { keyPath: 'id', autoIncrement: true});
       console.log('table creared and Open');
-   });
+      });
   }
 
   getJawlat() {
@@ -27,8 +29,16 @@ export class JawlatsDataService {
    }).then(() =>
     this.handDB.getAll('jawlatData').then(
       (ja) => {
-        this.jawlats = ja;
-        return this.jawlats
+        this.jawlats = ja.filter(v => v.values.isTasjilah === false);
+        const tas = ja.filter(v => v.values.isTasjilah === true);
+        this.tasjlat = tas;
+        console.log(this.tasjlat);
+    //    console.log(this.jawlats);
+         console.log(this.jawlats.length);
+          this.allJawlat = this.jawlats.concat(this.tasjlat);
+          console.log(this.allJawlat);
+          return this.allJawlat
+           
     },
        error => {
            console.log(error);
@@ -36,14 +46,18 @@ export class JawlatsDataService {
    ));
     }
 
-  createJawlah(values){
+   
+    createJawlah(values){
     this.handDB.add('jawlatData', { values }).then(
       () => {
          console.log('added complete')
          this.handDB.getAll('jawlatData').then(
           (ja) => {
-            this.jawlats = ja;
-          
+            this.jawlats = ja.filter(v => v.values.isTasjilah === false);
+            const tas = ja.filter(v => v.values.isTasjilah === true);
+            this.tasjlat = tas;
+            this.allJawlat = this.jawlats.concat(this.tasjlat);
+            
       },
       error => {
           console.log(error);
@@ -51,21 +65,22 @@ export class JawlatsDataService {
         );
     });
     };
-  ClearData(){
+
+   ClearData(){
     this.handDB.clear('jawlatData').then(
       () => {
           console.log('Cleared');
           this.jawlats = [];
+          this.tasjlat = [];
           this.jawlats.pop();
+          this.tasjlat.pop();
+          this.allJawlat = [];
+          this.allJawlat.pop();
       },
       error => {
           console.log(error);
         }
           );
-
-      
         }
-
-       
   }
 

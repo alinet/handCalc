@@ -29,8 +29,9 @@ export class HomePage implements OnInit, DoCheck{
 currentJawlah: number;
 @Input () farq: number;
 @Input () jawlahNo: number;
- jawlats;
-  
+
+ //jawlats;
+ allJawlat;  
  
  
 constructor(private modalController: ModalController, public jawService: JawlatsDataService,
@@ -41,20 +42,41 @@ this.farq = 0;
 this.jawService.createDB();
 
 }
+
  ngOnInit() {
   this.currentJawlah = 1;
+  this.jawService.getJawlat();
+ 
+ 
 }
 ngDoCheck(){
   if(this.currentJawlah >= 1){
     this.currentJawlah = this.jawService.jawlats.length + 1;
   }
-  var lanaTotal = this.jawService.jawlats.reduce(function(prev, cur) {  
+  
+  var lanaTotal = this.jawService.allJawlat.reduce(function(prev, cur) {  
     return prev + cur.values.lanaVal;
     }, 0);
-    var lahomTotal = this.jawService.jawlats.reduce(function(prev, cur) {  
+    var lahomTotal = this.jawService.allJawlat.reduce(function(prev, cur) {  
       return prev + cur.values.lahomVal;
       }, 0);
       this.farq = Math.abs(Math.abs(lanaTotal) - Math.abs(lahomTotal));
+
+      let lanaLabel = document.getElementById('lanalbl')
+      let lahomLabel = document.getElementById('lahomlbl')
+      if(Math.abs(lanaTotal) > Math.abs(lahomTotal)){
+       // console.log('lana is a losser')
+       
+        lanaLabel.style.color = 'red';
+        lahomLabel.style.color = 'black';
+      }else if(Math.abs(lahomTotal) > Math.abs(lanaTotal)) {
+      //  console.log('lahom is a losser')
+        lanaLabel.style.color = 'black';
+        lahomLabel.style.color = 'red';
+      }else {
+        lanaLabel.style.color = 'black';
+        lahomLabel.style.color = 'black';
+      }
   }
 
 async openModal() {

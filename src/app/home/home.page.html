@@ -6,10 +6,10 @@
   </ion-toolbar>
   <ion-item color="Primary" lines="none" class="jawlhcard">
     <ion-label>
-      <h1>لهم</h1>
+      <h1 id=lahomlbl >لهم</h1>
     </ion-label>
     <ion-label>
-      <h1>لنا</h1>
+      <h1 id=lanalbl  >لنا</h1>
     </ion-label>
     
   </ion-item>
@@ -46,7 +46,7 @@
    
     <ion-content>
       
-        <ion-card class="jawlhcard"  *ngFor="let jawlat of jawService.jawlats">
+        <ion-card class="jawlhcard"  *ngFor="let jawlat of jawService.allJawlat">
           
           <ion-card-header color="primary">
           

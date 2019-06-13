@@ -4,11 +4,9 @@
   <ion-toolbar>
    
    <ion-row>
-     <ion-col size="10" style="display:flex;align-items: center;justify-content: center;text-align: center;">
+     <ion-col size="12" style="justify-content: center;align-items: center;justify-content: center;text-align: center;">
      <h1> اضافة جولة </h1> </ion-col>
-     <ion-col size="2" style="padding-top:10px;">
-    
-    </ion-col>
+     
     </ion-row>
   </ion-toolbar>
 </ion-header>
@@ -45,69 +43,83 @@
 
   <ion-grid>
     <ion-radio-group (ionChange)="winnerValue($event)"> 
-    
+    <ion-row> 
+ <ion-col style="justify-content: center;align-items: center;justify-content: center;text-align: center;">
+   اللعب صافي 
+ </ion-col>
+  </ion-row>
   <ion-row align-items-center>
-  <ion-col>
-  
-    
-            <ion-item >
-                  <ion-label >خلوص صافي</ion-label>
-                  <ion-radio  value="khlosSafi"></ion-radio>
+  <ion-col size=6 style="justify-content: center;align-items: center;justify-content: center;text-align: center;">
+             <ion-item style="justify-content: center;align-items: center;justify-content: center;text-align: center;">
+            
+                               <ion-label >دبل </ion-label>
+                  <ion-radio  value="dabalSafi"></ion-radio>
+            
       </ion-item>
   </ion-col>
-  </ion-row>
   
-  <ion-row>
-  <ion-col > 
-              <ion-item >
-               <ion-label >دبل صافي</ion-label>
-                  <ion-radio  value="dabalSafi"></ion-radio>
+  <ion-col size=6 style="justify-content: center;align-items: center;justify-content: center;text-align: center;">
+             <ion-item style="justify-content: center;align-items: center;justify-content: center;text-align: center;">
+            
+                            <ion-label >خلوص </ion-label>
+                  <ion-radio  value="khlosSafi"></ion-radio>
               </ion-item>
  </ion-col>
  </ion-row>
-
+<ion-row> 
+ <ion-col style="justify-content: center;align-items: center;justify-content: center;text-align: center;">
+  اللعب غير صافي 
+ </ion-col>
+  </ion-row>
  <ion-row>
-  <ion-col > 
-  
-             <ion-item >
-                  <ion-label  >خلوص</ion-label>
-                  <ion-radio  value="khlos"></ion-radio>
+ <ion-col size=6 style="justify-content: center;align-items: center;justify-content: center;text-align: center;">
+             <ion-item style="justify-content: center;align-items: center;justify-content: center;text-align: center;">
+            
+               
+                      <ion-label >دبـل</ion-label>
+                <ion-radio   value="dabal" ></ion-radio>
              </ion-item>
 </ion-col>
-</ion-row>
-<ion-row>
-  <ion-col> 
-  
-             <ion-item >
-                    <ion-label >دبـل</ion-label>
-                <ion-radio   value="dabal" ></ion-radio>
+
+  <ion-col size=6 style="justify-content: center;align-items: center;justify-content: center;text-align: center;">
+             <ion-item style="justify-content: center;align-items: center;justify-content: center;text-align: center;">
+    
+                   <ion-label  >خلوص</ion-label>
+                  <ion-radio  value="khlos"></ion-radio>
              </ion-item>
  </ion-col>
  </ion-row>
 
+ <ion-row> 
+ <ion-col style="color:red;justify-content: center;align-items: center;justify-content: center;text-align: center;">
+  التسجيلة 
+ </ion-col>
+  </ion-row>
  <ion-row>
- <ion-col>
-             <ion-item >
-             <ion-label>تسجيلة - خلوص</ion-label>
-             <ion-radio  value="tasjilahKhlos" ></ion-radio>
+ <ion-col size=6 style="color:red;justify-content: center;align-items: center;justify-content: center;text-align: center;">
+             <ion-item style="justify-content: center;align-items: center;justify-content: center;text-align: center;">
+          
+              <ion-label> دبل</ion-label>
+              <ion-radio   value="tasjilahDabal" ></ion-radio>
              </ion-item>
   </ion-col>
+  <ion-col size=6>
+              <ion-item style="justify-content: center;align-items: center;justify-content: center;text-align: center;">
+              <ion-label>خلوص</ion-label>
+              <ion-radio  value="tasjilahKhlos" ></ion-radio>
+              </ion-item>
+   </ion-col>
  </ion-row>
     
  <ion-row>
-  <ion-col>
-              <ion-item >
-              <ion-label >تسجيلة - دبل</ion-label>
-              <ion-radio   value="tasjilahDabal" ></ion-radio>
-              </ion-item>
-   </ion-col>
+  
   </ion-row>
     </ion-radio-group>
      
 </ion-grid>
       
 <ion-grid>
-  <ion-row align-items-center>
+  <ion-row id="countOfNazil" align-items-center *ngIf="isHidden">
       <ion-col>
         <ion-item>
           <ion-label text-right> عدد النازلين </ion-label>
@@ -125,25 +137,31 @@
           </ion-segment>
       </ion-col>
     </ion-row>
-  <ion-row>
+  <ion-row *ngIf="isHidden">
   <ion-col> 
   <ion-item>
   <ion-label text-right position="floating">المجموع</ion-label>
   <ion-input text-right color="primary" type="number" maxlength="3"  value="" (ionInput)="majmoValue($event)"></ion-input>
 </ion-item>
 </ion-col>
+</ion-row>
+<ion-row>
+<ion-col size=6>
+   <ion-button (click)="closeModal()" color="danger" style="width: 100%; height:50px;">
+          إلغاء        <ion-icon name="close" style="padding-left:7px;"></ion-icon>    
+                 </ion-button>
+    
+                
+</ion-col>
+<ion-col size=6>
+ <ion-button (click)="onSubmit()" color="primary" style="width: 100%;height:50px;"> أضافة 
+                    <ion-icon name="add" style="padding-left:7px;">  </ion-icon>
+                    </ion-button>
+</ion-col>
 </ion-row>    
 </ion-grid>
 
 </ion-content>
 <ion-footer class="jawlhcard">
-   
-      <ion-button (click)="closeModal()" color="danger" style="width: 45%; height:50px;">
-          إلغاء        <ion-icon name="close" style="padding-left:7px;"></ion-icon>    
-                 </ion-button>
-    
-                 <ion-button (click)="onSubmit()" color="primary" style="width: 45%;height:50px;"> أضافة 
-                    <ion-icon name="add" style="padding-left:7px;">  </ion-icon>
-                    </ion-button>
                   
 </ion-footer>

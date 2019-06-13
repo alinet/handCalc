@@ -1,4 +1,4 @@
-import { Component, OnInit, Injectable, ViewChild, Output } from '@angular/core';
+import { Component, OnInit, Injectable, ViewChild, Output, Input } from '@angular/core';
 import { ModalController, IonSelectOption, IonItemOption, IonSelect, IonInput } from '@ionic/angular';
 import { RadioControlRegistry, RADIO_VALUE_ACCESSOR } from '@angular/forms/src/directives/radio_control_value_accessor';
 import {  FormsModule, FormBuilder, FormGroup, ReactiveFormsModule, FormControl, Form, Validators } from '@angular/forms';
@@ -36,19 +36,31 @@ currentvalue: number;
  myForm: FormGroup;
  majmo: string;
  taVal: any;
-  
+ isHidden: boolean = false;
   constructor(private modalController: ModalController, private jawService: JawlatsDataService) { }
  
   ngOnInit() {}
 
   teamValue(event) {this.winnerTeam = event.detail.value; }
-  winnerValue(event) { this.winType = event.detail.value; }
+  winnerValue(event) { this.winType = event.detail.value
+    if(this.winType == 'khlos' || this.winType == 'dabal'){
+      console.log('khlos my dear');
+      this.isHidden = true;
+    }else {
+      this.isHidden = false;
+    } 
+  }
+  
+  
   nazilValue(event) { this.nazilCount = event.detail.value; }
 
   majmoValue(event){this.majmo = event.target.value; }
 
   closeModal(): void {const modal = this.modalController.dismiss(); }  
 
+  ngDoCheck(){
+    
+  }
   async onSubmit() {
     //team lana 
      if(this.winnerTeam == 'lana' && this.winType == 'khlosSafi'){
@@ -99,27 +111,23 @@ currentvalue: number;
       
    } 
    if(this.winnerTeam == 'lahom' && this.winType == 'khlosSafi'){
-    // if(alength == 0){ this.jawlahNo = 0; this.jawlahNo += 1; } else { this.jawlahNo +=1}
     this.jawlahNo = this.currentvalue;
         this.lanaVal = 300;
         this.lahomVal = -30;
         this.isTasjilah = false;
   }
   else if(this.winnerTeam =='lahom' && this.winType == 'dabalSafi'){
-    // if (alength== 0) {this.jawlahNo = 0;this.jawlahNo += 1; } else {this.jawlahNo +=1}
     this.jawlahNo = this.currentvalue;
     this.lanaVal = 600;
     this.lahomVal = -60;
     this.isTasjilah = false;
   } 
   else if(this.winnerTeam =='lahom' && this.winType == 'khlos'){
-    // if (alength== 0) {this.jawlahNo = 0;this.jawlahNo += 1; } else {this.jawlahNo +=1}
     this.jawlahNo = this.currentvalue;
     this.lahomVal = -30;
 
     if(this.nazilCount == 1){
-      
-    this.lanaVal = (200 + parseInt(this.majmo,10));
+   this.lanaVal = (200 + parseInt(this.majmo,10));
   }
     else if (this.nazilCount ==2){
       this.lanaVal= 100 + parseInt(this.majmo,10)
@@ -181,9 +189,21 @@ currentvalue: number;
       'lahomVal': this.lahomVal,
       'isTasjilah': this.isTasjilah
     }
-    
-   
+
+    if(this.isTasjilah == true){
+      this.jawalinfo = {
+        'jawlahNo': this.jawlahNo = 0,
+        'winnerTeam': this.winnerTeam,
+        'lanaVal': this.lanaVal,
+        'lahomVal': this.lahomVal,
+        'isTasjilah': this.isTasjilah
+      }
       this.jawService.createJawlah(this.jawalinfo);
+    } else {
+      this.jawService.createJawlah(this.jawalinfo);
+      
+    }
+      
       let modal = await this.modalController.dismiss();
       return modal;
    
