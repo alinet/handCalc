@@ -187,7 +187,8 @@ currentvalue: number;
       'winnerTeam': this.winnerTeam,
       'lanaVal': this.lanaVal,
       'lahomVal': this.lahomVal,
-      'isTasjilah': this.isTasjilah
+      'isTasjilah': this.isTasjilah,
+      'winType': this.winType
     }
 
     if(this.isTasjilah == true){
@@ -196,7 +197,8 @@ currentvalue: number;
         'winnerTeam': this.winnerTeam,
         'lanaVal': this.lanaVal,
         'lahomVal': this.lahomVal,
-        'isTasjilah': this.isTasjilah
+        'isTasjilah': this.isTasjilah,
+        'winType': this.winType
       }
       this.jawService.createJawlah(this.jawalinfo);
     } else {

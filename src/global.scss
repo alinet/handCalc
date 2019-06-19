@@ -11,12 +11,25 @@
 @import '~@ionic/angular/css/flex-utils.css';
 
 .my-custom-modal-css .modal-wrapper {
-   height: 100%;
-   top: 0;
-   width: 100%;
-   position: absolute; 
-   display: block;  
+
+  align-items: flex-end;
+    --height: auto;
+    .ion-page {
+        position: relative;
+        display: block;
+        contain: content;
+        .inner-content {
+           // max-height: 80vh;
+            overflow: auto;
+          //  padding: 10px;
+        }
+    }
 }
+  
+        
+
+  
+
 @font-face {
    font-family: 'Ithra Light';
    src: url('../src/assets/fonts/Ithra-Light.ttf');
@@ -31,9 +44,4 @@
    font-style: normal;
  }
  
- .my-custom-modal-css .modal-wrapper {
-  height: 64%;
-  top: 8%;
-  position: absolute; 
-  display: block;  
-}
+ 

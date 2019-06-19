@@ -11,9 +11,9 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content >
+<div class="inner-content">
 
-    <ion-grid >
+    <ion-grid style="overflow: auto;position: relative;display: block;contain: content;" >
     <ion-radio-group required (ionChange)="teamValue($event)" style="vertical-align: middle;justify-content: center;display: flex;align-items: center;"> 
     
   <ion-row>
@@ -161,7 +161,7 @@
 </ion-row>    
 </ion-grid>
 
-</ion-content>
+</div>
 <ion-footer class="jawlhcard">
                   
 </ion-footer>
