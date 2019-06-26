@@ -41,6 +41,26 @@
 </ion-grid>
 
 
+<ion-segment value="khlos" class="label">
+   <ion-segment-button value="tasjilahDabal">
+    <ion-label style="height:30px;" >تسجيلة</ion-label>
+  </ion-segment-button>
+  <ion-segment-button value="dabal">
+    <ion-label style="height:30px;">دبـل</ion-label>
+  </ion-segment-button>
+  <ion-segment-button value="khlos">
+    <ion-label style="height:30px;" >خلـوص</ion-label>
+    
+  </ion-segment-button>
+ 
+</ion-segment>
+
+
+
+
+
+
+
   <ion-grid>
     <ion-radio-group (ionChange)="winnerValue($event)"> 
     <ion-row> 
@@ -140,8 +160,9 @@
   <ion-row *ngIf="isHidden">
   <ion-col> 
   <ion-item>
-  <ion-label text-right position="floating">المجموع</ion-label>
-  <ion-input text-right color="primary" type="number" maxlength="3"  value="" (ionInput)="majmoValue($event)"></ion-input>
+  <ion-label text-right position="floating">ادخل المجموع</ion-label>
+  <ion-input text-right color="primary" type="tel" maxlength="3"  value="" (ionInput)="majmoValue($event)"></ion-input>
+
 </ion-item>
 </ion-col>
 </ion-row>
