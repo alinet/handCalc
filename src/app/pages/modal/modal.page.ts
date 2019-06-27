@@ -40,7 +40,9 @@ currentvalue: number;
   constructor(private modalController: ModalController, private jawService: JawlatsDataService) { }
  
   ngOnInit() {}
-
+  // segmentChanged(ev: any) {
+  //   console.log('Segment changed', ev.detail.value);
+  // }
   teamValue(event) {this.winnerTeam = event.detail.value; }
   winnerValue(event) { this.winType = event.detail.value
     if(this.winType == 'khlos' || this.winType == 'dabal'){

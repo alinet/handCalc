@@ -44,13 +44,14 @@
 </ion-header>
 
 
-<ion-content >
+
    
-    <ion-content >
-      
-        <ion-card *ngFor="let jawlat of jawService.allJawlat" [ngSwitch] = "jawlat.values.winType">
-          <ion-grid class="jawlhcard" >
-          <ion-row align-items: center>
+    <ion-content>
+    <ion-grid>
+      <ion-row justify-content-center align-items-center style="margin-top: 2px !important; margin-bottom:2px !important;">
+        <ion-card class="myCard" *ngFor="let jawlat of jawService.allJawlat" [ngSwitch] = "jawlat.values.winType">
+          <ion-grid class="myCard">
+          <ion-row justify-content-center align-items-center>
             <ion-col size="5">
              <ion-label *ngSwitchCase = "'khlosSafi'">  خلـوص صـافي</ion-label>
             <ion-label *ngSwitchCase = "'khlos'"> خلـوص </ion-label>
@@ -74,20 +75,20 @@
               
           </ion-grid>
         </ion-card>
-      
+        </ion-row>
+      </ion-grid>
       </ion-content>
       
-      
-  </ion-content>
+
 
   <ion-footer  no-border>
    <ion-grid>
     <ion-row no-padding no-margin>
       <ion-col col-12 no-padding>
-        <ion-button (click)="clearmystorage()" fill="outline" style="padding-left:10px;width:47%;height:50px;margin-bottom: 20px;"> لعبة جديدة 
+        <ion-button (click)="clearmystorage()" fill="outline" style="padding-left:10px;width:47%;height:50px;margin-bottom: 18px;"> لعبة جديدة 
         <ion-icon name="refresh" style="padding-left:7px;">  </ion-icon>
         </ion-button>
-       <ion-button (click)="openModal()" color="primary" style="padding-left:10px;width:47%; height:50px;margin-bottom: 20px;">
+       <ion-button (click)="openModal()" color="primary" style="padding-left:10px;width:47%; height:50px;margin-bottom: 18px;">
           اضافة جولة
         <ion-icon name="add" style="padding-left:7px;"></ion-icon>    
                  </ion-button>

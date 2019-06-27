@@ -41,14 +41,14 @@
 </ion-grid>
 
 
-<ion-segment value="khlos" class="label">
-   <ion-segment-button value="tasjilahDabal">
+<ion-segment value="k" class="label" [ngModel]="status">
+   <ion-segment-button value="t">
     <ion-label style="height:30px;" >تسجيلة</ion-label>
   </ion-segment-button>
-  <ion-segment-button value="dabal">
-    <ion-label style="height:30px;">دبـل</ion-label>
+  <ion-segment-button value="d">
+    <ion-label style="height:30px;" >دبـل</ion-label>
   </ion-segment-button>
-  <ion-segment-button value="khlos">
+  <ion-segment-button value="k">
     <ion-label style="height:30px;" >خلـوص</ion-label>
     
   </ion-segment-button>
@@ -58,84 +58,55 @@
 
 
 
-
-
-
-  <ion-grid>
-    <ion-radio-group (ionChange)="winnerValue($event)"> 
-    <ion-row> 
- <ion-col style="justify-content: center;align-items: center;justify-content: center;text-align: center;">
-   اللعب صافي 
- </ion-col>
-  </ion-row>
+<div [ngSwitch]="status"> 
+  <ion-grid id="dabalGroup" *ngSwitchCase="d">
+  
+    <ion-radio-group (ionChange)="winnerValue($event)" > 
+ <div *ngSwitchCase="d">
   <ion-row align-items-center>
   <ion-col size=6 style="justify-content: center;align-items: center;justify-content: center;text-align: center;">
              <ion-item style="justify-content: center;align-items: center;justify-content: center;text-align: center;">
-            
-                               <ion-label >دبل </ion-label>
+                               <ion-label >  دبل صـافي </ion-label>
                   <ion-radio  value="dabalSafi"></ion-radio>
-            
       </ion-item>
   </ion-col>
-  
   <ion-col size=6 style="justify-content: center;align-items: center;justify-content: center;text-align: center;">
-             <ion-item style="justify-content: center;align-items: center;justify-content: center;text-align: center;">
-            
-                            <ion-label >خلوص </ion-label>
-                  <ion-radio  value="khlosSafi"></ion-radio>
-              </ion-item>
- </ion-col>
- </ion-row>
-<ion-row> 
- <ion-col style="justify-content: center;align-items: center;justify-content: center;text-align: center;">
-  اللعب غير صافي 
- </ion-col>
-  </ion-row>
- <ion-row>
- <ion-col size=6 style="justify-content: center;align-items: center;justify-content: center;text-align: center;">
              <ion-item style="justify-content: center;align-items: center;justify-content: center;text-align: center;">
             
                
-                      <ion-label >دبـل</ion-label>
+                      <ion-label >غير صـافي</ion-label>
                 <ion-radio   value="dabal" ></ion-radio>
              </ion-item>
 </ion-col>
-
+ </ion-row>
+   </ion-grid>
+  
+<ion-grid *ngSwitchCase="k">
+  
+<ion-row>
+  <ion-col size=6 style="justify-content: center;align-items: center;justify-content: center;text-align: center;" >
+             <ion-item style="justify-content: center;align-items: center;justify-content: center;text-align: center;">
+            
+                            <ion-label >صـافي </ion-label>
+                  <ion-radio  value="khlosSafi"></ion-radio>
+              </ion-item>
+ </ion-col>
+ 
   <ion-col size=6 style="justify-content: center;align-items: center;justify-content: center;text-align: center;">
              <ion-item style="justify-content: center;align-items: center;justify-content: center;text-align: center;">
     
-                   <ion-label  >خلوص</ion-label>
+                  <ion-label >غير صـافي</ion-label>
                   <ion-radio  value="khlos"></ion-radio>
              </ion-item>
  </ion-col>
  </ion-row>
 
- <ion-row> 
- <ion-col style="color:red;justify-content: center;align-items: center;justify-content: center;text-align: center;">
-  التسجيلة 
- </ion-col>
-  </ion-row>
- <ion-row>
- <ion-col size=6 style="color:red;justify-content: center;align-items: center;justify-content: center;text-align: center;">
-             <ion-item style="justify-content: center;align-items: center;justify-content: center;text-align: center;">
-          
-              <ion-label> دبل</ion-label>
-              <ion-radio   value="tasjilahDabal" ></ion-radio>
-             </ion-item>
-  </ion-col>
-  <ion-col size=6>
-              <ion-item style="justify-content: center;align-items: center;justify-content: center;text-align: center;">
-              <ion-label>خلوص</ion-label>
-              <ion-radio  value="tasjilahKhlos" ></ion-radio>
-              </ion-item>
-   </ion-col>
- </ion-row>
-    
- <ion-row>
-  
-  </ion-row>
-    </ion-radio-group>
-     
+</div>
+ </ion-radio-group>
+
+
+
+
 </ion-grid>
       
 <ion-grid>
@@ -182,7 +153,36 @@
 </ion-row>    
 </ion-grid>
 
-</div>
+<ion-grid>
+
+<ion-row > 
+ <ion-col style="color:red;justify-content: center;align-items: center;justify-content: center;text-align: center;">
+  التسجيلة 
+ </ion-col>
+  </ion-row>
+ <ion-row>
+ <ion-col size=6 style="color:red;justify-content: center;align-items: center;justify-content: center;text-align: center;">
+             <ion-item style="justify-content: center;align-items: center;justify-content: center;text-align: center;">
+          
+              <ion-label> دبل</ion-label>
+              <ion-radio   value="tasjilahDabal" ></ion-radio>
+             </ion-item>
+  </ion-col>
+  <ion-col size=6>
+              <ion-item style="justify-content: center;align-items: center;justify-content: center;text-align: center;">
+              <ion-label>خلوص</ion-label>
+              <ion-radio  value="tasjilahKhlos" ></ion-radio>
+              </ion-item>
+   </ion-col>
+ </ion-row>
+
+
+
+</ion-grid>
+
+
+
+
 <ion-footer class="jawlhcard">
                   
 </ion-footer>
