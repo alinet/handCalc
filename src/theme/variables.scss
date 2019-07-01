@@ -98,4 +98,8 @@ $font-family-base: "Ithra Bold",Ithra-Light !default;
   font-family: "Ithra Bold";
   
 }
+.my-custom-modal-css .modal-wrapper {
 
+    --height: 65%;
+    --border-radius: 25px;
+}

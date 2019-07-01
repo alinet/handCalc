@@ -23,7 +23,8 @@ import { delay } from 'q';
 })
 
 export class ModalPage implements OnInit {
-  
+
+status: string;
 currentvalue: number;
  jawlahNo: number;
  winnerTeam: string;
@@ -40,17 +41,26 @@ currentvalue: number;
   constructor(private modalController: ModalController, private jawService: JawlatsDataService) { }
  
   ngOnInit() {}
-  // segmentChanged(ev: any) {
-  //   console.log('Segment changed', ev.detail.value);
-  // }
+   segmentChanged(ev: any) {
+//    console.log('Segment changed', ev.detail.value);
+
+this.status = ev.detail.value;
+
+    
+}
   teamValue(event) {this.winnerTeam = event.detail.value; }
-  winnerValue(event) { this.winType = event.detail.value
-    if(this.winType == 'khlos' || this.winType == 'dabal'){
-      console.log('khlos my dear');
+  winnerValue(event) { this.winType = event.detail.value; console.log(this.winType);
+    if(this.winType === 'khlos' ){
+     // console.log('khlos my dear');
       this.isHidden = true;
-    }else {
+   
+    }else if (this.winType === 'dabal') {
+      this.isHidden = true;
+     
+    } else {
       this.isHidden = false;
-    } 
+    }
+
   }
   
   
@@ -58,9 +68,11 @@ currentvalue: number;
 
   majmoValue(event){this.majmo = event.target.value; }
 
+  
   closeModal(): void {const modal = this.modalController.dismiss(); }  
 
   ngDoCheck(){
+  
     
   }
   async onSubmit() {

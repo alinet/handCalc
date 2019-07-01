@@ -1,173 +1,105 @@
 
-
 <ion-header>
-  <ion-toolbar>
-   
-   <ion-row>
-     <ion-col size="12" style="justify-content: center;align-items: center;justify-content: center;text-align: center;">
-     <h1> اضافة جولة </h1> </ion-col>
-     
-    </ion-row>
-  </ion-toolbar>
+   <ion-toolbar>
+      <ion-row>
+         <ion-col size="12" style="justify-content: center;align-items: center;justify-content: center;text-align: center;">
+            <h1> اضافة جولة </h1>
+         </ion-col>
+      </ion-row>
+   </ion-toolbar>
 </ion-header>
-
-<div class="inner-content">
-
-    <ion-grid style="overflow: auto;position: relative;display: block;contain: content;" >
-    <ion-radio-group required (ionChange)="teamValue($event)" style="vertical-align: middle;justify-content: center;display: flex;align-items: center;"> 
-    
-  <ion-row>
-
-    <ion-col>
-              <ion-item lines="none">
-                 <ion-label style="padding-right:5px;" >لهـم</ion-label>
-                 <ion-radio id="lahom"  name="winner" value="lahom" ></ion-radio>
-             </ion-item>
-    </ion-col>
-   
-     <ion-col>
-              <ion-item lines="none">
-                <ion-label style="padding-right:5px;">لنـا</ion-label>
-            <ion-radio id="lana" name="winner" value="lana"> </ion-radio>
-             </ion-item>
-    </ion-col>
-    <ion-col style="justify-content: center;display: flex;align-items: center;">
-  <ion-icon color="primary" style="font-size: 32px;" name="trophy"></ion-icon>
-    </ion-col>
-  </ion-row>
-   
-    </ion-radio-group>
-     
-</ion-grid>
-
-
-<ion-segment value="k" class="label" [ngModel]="status">
-   <ion-segment-button value="t">
-    <ion-label style="height:30px;" >تسجيلة</ion-label>
-  </ion-segment-button>
-  <ion-segment-button value="d">
-    <ion-label style="height:30px;" >دبـل</ion-label>
-  </ion-segment-button>
-  <ion-segment-button value="k">
-    <ion-label style="height:30px;" >خلـوص</ion-label>
-    
-  </ion-segment-button>
- 
-</ion-segment>
-
-
-
-
-<div [ngSwitch]="status"> 
-  <ion-grid id="dabalGroup" *ngSwitchCase="d">
-  
-    <ion-radio-group (ionChange)="winnerValue($event)" > 
- <div *ngSwitchCase="d">
-  <ion-row align-items-center>
-  <ion-col size=6 style="justify-content: center;align-items: center;justify-content: center;text-align: center;">
-             <ion-item style="justify-content: center;align-items: center;justify-content: center;text-align: center;">
-                               <ion-label >  دبل صـافي </ion-label>
-                  <ion-radio  value="dabalSafi"></ion-radio>
-      </ion-item>
-  </ion-col>
-  <ion-col size=6 style="justify-content: center;align-items: center;justify-content: center;text-align: center;">
-             <ion-item style="justify-content: center;align-items: center;justify-content: center;text-align: center;">
-            
-               
-                      <ion-label >غير صـافي</ion-label>
-                <ion-radio   value="dabal" ></ion-radio>
-             </ion-item>
-</ion-col>
- </ion-row>
-   </ion-grid>
-  
-<ion-grid *ngSwitchCase="k">
-  
-<ion-row>
-  <ion-col size=6 style="justify-content: center;align-items: center;justify-content: center;text-align: center;" >
-             <ion-item style="justify-content: center;align-items: center;justify-content: center;text-align: center;">
-            
-                            <ion-label >صـافي </ion-label>
-                  <ion-radio  value="khlosSafi"></ion-radio>
-              </ion-item>
- </ion-col>
- 
-  <ion-col size=6 style="justify-content: center;align-items: center;justify-content: center;text-align: center;">
-             <ion-item style="justify-content: center;align-items: center;justify-content: center;text-align: center;">
-    
-                  <ion-label >غير صـافي</ion-label>
-                  <ion-radio  value="khlos"></ion-radio>
-             </ion-item>
- </ion-col>
- </ion-row>
-
-</div>
- </ion-radio-group>
-
-
-
-
-</ion-grid>
+<ion-content>
+   <ion-grid style="overflow: auto;position: relative;display: block;contain: content;" >
+      <ion-radio-group required (ionChange)="teamValue($event)" style="vertical-align: middle;justify-content: center;display: flex;align-items: center;">
+         <ion-row style="margin-bottom: 20px;">
+            <ion-col>
+               <ion-item lines="none">
+                  <ion-label style="padding-right:5px;" >لهـم</ion-label>
+                  <ion-radio id="lahom"  name="winner" value="lahom" ></ion-radio>
+               </ion-item>
+            </ion-col>
+            <ion-col>
+               <ion-item lines="none">
+                  <ion-label style="padding-right:5px;">لنـا</ion-label>
+                  <ion-radio id="lana" name="winner" value="lana"> </ion-radio>
+               </ion-item>
+            </ion-col>
+            <ion-col style="justify-content: center;display: flex;align-items: center;">
+               <ion-icon color="primary" style="font-size: 32px;" name="trophy"></ion-icon>
+            </ion-col>
+         </ion-row>
+       
+      </ion-radio-group>
+      <ion-row >
+         <ion-segment  value="" class="label" [ngSwitch]="status" (ionChange)="segmentChanged($event)" style="margin-bottom: 10px;">
+         <ion-segment-button value="t">
+            <ion-label class="label" >تسجيلة</ion-label>
+         </ion-segment-button>
+         <ion-segment-button value="d">
+            <ion-label  class="label">دبـل</ion-label>
+         </ion-segment-button>
+         <ion-segment-button value="k">
+            <ion-label class="label" >خلـوص</ion-label>
+         </ion-segment-button>
+         </ion-segment>
+      </ion-row>
+      <div [ngSwitch]="status">
       
-<ion-grid>
-  <ion-row id="countOfNazil" align-items-center *ngIf="isHidden">
-      <ion-col>
-        <ion-item>
-          <ion-label text-right> عدد النازلين </ion-label>
-        </ion-item>
-         <ion-segment (ionChange)="nazilValue($event)">
-          <ion-segment-button value="3">
-            <ion-label>3</ion-label>
-          </ion-segment-button>
-          <ion-segment-button value="2">
-             <ion-label>2</ion-label>
-            </ion-segment-button>
-          <ion-segment-button value="1">
-             <ion-label>1</ion-label>
-              </ion-segment-button>
-          </ion-segment>
-      </ion-col>
-    </ion-row>
-  <ion-row *ngIf="isHidden">
-  <ion-col> 
-  <ion-item>
-  <ion-label text-right position="floating">ادخل المجموع</ion-label>
-  <ion-input text-right color="primary" type="tel" maxlength="3"  value="" (ionInput)="majmoValue($event)"></ion-input>
+      <ion-radio-group *ngSwitchCase="'d'" (ionChange)="winnerValue($event)">
+         <ion-row align-items-center >
+         <ion-col size=6 style="justify-content: center;align-items: center;justify-content: center;text-align: center;">
+               <ion-item style="justify-content: center;align-items: center;justify-content: center;text-align: center;">
+                  <ion-label >غير صـافي</ion-label>
+                  <ion-radio   value="dabal" ></ion-radio>
+               </ion-item>
+            </ion-col>
+            <ion-col size=6 style="justify-content: center;align-items: center;justify-content: center;text-align: center;">
+               <ion-item style="justify-content: center;align-items: center;justify-content: center;text-align: center;">
+                  <ion-label >   صـافي </ion-label>
+                  <ion-radio  value="dabalSafi"></ion-radio>
+               </ion-item>
+            </ion-col>
+            
+         </ion-row>
+          </ion-radio-group>
+           
+            
+     
+      </div>
+      <div [ngSwitch]="status">
+            <ion-radio-group *ngSwitchCase="'k'" (ionChange)="winnerValue($event)" > 
+         <ion-row>
+         
+          <ion-col size=6 style="justify-content: center;align-items: center;justify-content: center;text-align: center;">
+                      <ion-item style="justify-content: center;align-items: center;justify-content: center;text-align: center;">
+             
+                           <ion-label >غير صـافي</ion-label>
+                           <ion-radio  value="khlos"></ion-radio>
+                      </ion-item>
+          </ion-col>
+          <ion-col size=6 style="justify-content: center;align-items: center;justify-content: center;text-align: center;" >
+                      <ion-item style="justify-content: center;align-items: center;justify-content: center;text-align: center;">
+                     
+                                     <ion-label > صـافي </ion-label>
+                           <ion-radio  value="khlosSafi"></ion-radio>
+                       </ion-item>
+          </ion-col>
+          </ion-row>
+          </ion-radio-group>
+         </div>
 
-</ion-item>
-</ion-col>
-</ion-row>
-<ion-row>
-<ion-col size=6>
-   <ion-button (click)="closeModal()" color="danger" style="width: 100%; height:50px;">
-          إلغاء        <ion-icon name="close" style="padding-left:7px;"></ion-icon>    
-                 </ion-button>
-    
-                
-</ion-col>
-<ion-col size=6>
- <ion-button (click)="onSubmit()" color="primary" style="width: 100%;height:50px;"> أضافة 
-                    <ion-icon name="add" style="padding-left:7px;">  </ion-icon>
-                    </ion-button>
-</ion-col>
-</ion-row>    
-</ion-grid>
+         <div [ngSwitch]="status">
+            <ion-radio-group *ngSwitchCase="'t'" (ionChange)="winnerValue($event)" > 
 
-<ion-grid>
-
-<ion-row > 
- <ion-col style="color:red;justify-content: center;align-items: center;justify-content: center;text-align: center;">
-  التسجيلة 
- </ion-col>
-  </ion-row>
- <ion-row>
- <ion-col size=6 style="color:red;justify-content: center;align-items: center;justify-content: center;text-align: center;">
-             <ion-item style="justify-content: center;align-items: center;justify-content: center;text-align: center;">
+           
+           <ion-row>
+                    <ion-col size=6 style="color:red;justify-content: center;align-items: center;justify-content: center;text-align: center;">
+                <ion-item style="justify-content: center;align-items: center;justify-content: center;text-align: center;">
           
               <ion-label> دبل</ion-label>
               <ion-radio   value="tasjilahDabal" ></ion-radio>
              </ion-item>
-  </ion-col>
+         </ion-col>
   <ion-col size=6>
               <ion-item style="justify-content: center;align-items: center;justify-content: center;text-align: center;">
               <ion-label>خلوص</ion-label>
@@ -176,13 +108,48 @@
    </ion-col>
  </ion-row>
 
-
-
-</ion-grid>
-
-
-
-
-<ion-footer class="jawlhcard">
-                  
-</ion-footer>
+           </ion-radio-group>
+         </div>
+          <ion-row id="countOfNazil" align-items-center *ngIf="isHidden">
+                <ion-col>
+                  <ion-item>
+                    <ion-label text-right> عدد النازلين </ion-label>
+                  </ion-item>
+                   <ion-segment (ionChange)="nazilValue($event)" class="nazil" >
+                    <ion-segment-button value="3">
+                      <ion-label>3</ion-label>
+                    </ion-segment-button>
+                    <ion-segment-button value="2">
+                       <ion-label>2</ion-label>
+                      </ion-segment-button>
+                    <ion-segment-button value="1">
+                       <ion-label>1</ion-label>
+                        </ion-segment-button>
+                    </ion-segment>
+                </ion-col>
+                </ion-row>
+                <ion-row *ngIf="isHidden">
+            <ion-col> 
+            <ion-item>
+            <ion-label text-right position="floating">ادخل المجموع</ion-label>
+            <ion-input text-right color="primary" type="tel" maxlength="3"  value="" (ionInput)="majmoValue($event)"></ion-input>
+            
+            </ion-item>
+            </ion-col>
+            </ion-row>
+      <ion-row>
+         <ion-col size=6>
+            <ion-button (click)="closeModal()" color="danger" style="width: 100%; height:50px;">
+               إلغاء        
+               <ion-icon name="close" style="padding-left:7px;"></ion-icon>
+            </ion-button>
+         </ion-col>
+         <ion-col size=6>
+            <ion-button (click)="onSubmit()" color="primary" style="width: 100%;height:50px;">
+               أضافة 
+               <ion-icon name="add" style="padding-left:7px;">  </ion-icon>
+            </ion-button>
+         </ion-col>
+      </ion-row>
+   </ion-grid>
+</ion-content>
