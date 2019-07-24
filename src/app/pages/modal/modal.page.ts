@@ -205,6 +205,11 @@ this.status = ev.detail.value;
       'winType': this.winType
     }
 
+    if(this.winnerTeam == null){
+      console.log("please Select a Team");
+      
+    }
+
     if(this.isTasjilah == true){
       this.jawalinfo = {
         'jawlahNo': this.jawlahNo = 0,

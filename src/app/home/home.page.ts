@@ -17,6 +17,7 @@ import { Subscriber } from 'rxjs';
 import { Observable, observable ,of } from 'rxjs';
 import { detectChangesInRootView } from '@angular/core/src/render3/instructions';
 import { AlertController } from '@ionic/angular';
+import { DISABLED } from '@angular/forms/src/model';
 
 
 
@@ -77,6 +78,8 @@ ngDoCheck(){
         lanaLabel.style.color = 'black';
         lahomLabel.style.color = 'black';
       }
+    
+      
   }
 
 async openModal() {
