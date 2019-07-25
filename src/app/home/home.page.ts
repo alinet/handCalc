@@ -30,6 +30,7 @@ export class HomePage implements OnInit, DoCheck{
 currentJawlah: number;
 @Input () farq: number;
 @Input () jawlahNo: number;
+@Input () toAddorNot: boolean;
 
  //jawlats;
  allJawlat;  
@@ -47,7 +48,7 @@ this.jawService.createDB();
  ngOnInit() {
   this.currentJawlah = 1;
   this.jawService.getJawlat();
- 
+  
  
 }
 ngDoCheck(){
@@ -78,7 +79,21 @@ ngDoCheck(){
         lanaLabel.style.color = 'black';
         lahomLabel.style.color = 'black';
       }
-    
+
+      if(this.currentJawlah == 6 && this.farq > 600){
+        this.toAddorNot = true;
+    }
+    if(this.currentJawlah == 5 && this.farq > 1320){
+      this.toAddorNot = true;
+    }
+  if(this.currentJawlah == 4 && this.farq > 1980){
+      this.toAddorNot = true;
+    }
+    if(this.currentJawlah == 8){
+      this.toAddorNot = true;
+    }
+
+   
       
   }
 
@@ -110,7 +125,8 @@ async clearmystorage(){
         text: 'نعم',
         handler: () => {
            this.jawService.ClearData();
-          this.currentJawlah = 1;  
+          this.currentJawlah = 1; 
+          this.toAddorNot = false; 
          // console.log('Confirm Okay');
         }
       }

@@ -1,4 +1,4 @@
-import { Component, OnInit, Injectable, ViewChild, Output, Input } from '@angular/core';
+import { Component, OnInit, Injectable, ViewChild, Output, Input, DoCheck } from '@angular/core';
 import { ModalController, IonSelectOption, IonItemOption, IonSelect, IonInput } from '@ionic/angular';
 import { RadioControlRegistry, RADIO_VALUE_ACCESSOR } from '@angular/forms/src/directives/radio_control_value_accessor';
 import {  FormsModule, FormBuilder, FormGroup, ReactiveFormsModule, FormControl, Form, Validators } from '@angular/forms';
@@ -11,7 +11,7 @@ import { stringify } from '@angular/core/src/util';
 import { analyzeAndValidateNgModules } from '@angular/compiler';
 import { JawlatsDataService } from 'src/app/jawlats-data.service';
 import { EventListener } from '@angular/core/src/debug/debug_node';
-import { Subscriber } from 'rxjs';
+import { Subscriber, empty, VirtualTimeScheduler } from 'rxjs';
 import { delay } from 'q';
 
 
@@ -22,7 +22,7 @@ import { delay } from 'q';
   
 })
 
-export class ModalPage implements OnInit {
+export class ModalPage implements OnInit, DoCheck {
 
 status: string;
 currentvalue: number;
@@ -38,9 +38,14 @@ currentvalue: number;
  majmo: string;
  taVal: any;
  isHidden: boolean = false;
+ @Input () isAddDisabled: boolean;
   constructor(private modalController: ModalController, private jawService: JawlatsDataService) { }
  
-  ngOnInit() {}
+  ngOnInit() {
+
+   
+
+  }
    segmentChanged(ev: any) {
 //    console.log('Segment changed', ev.detail.value);
 
@@ -72,7 +77,12 @@ this.status = ev.detail.value;
   closeModal(): void {const modal = this.modalController.dismiss(); }  
 
   ngDoCheck(){
-  
+    if(this.winnerTeam == null || this.winType == null){
+      this.isAddDisabled = true;
+      
+    } else {
+     this.isAddDisabled = false;
+    }
     
   }
   async onSubmit() {
