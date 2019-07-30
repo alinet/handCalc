@@ -1,6 +1,6 @@
 {
   "name": "hasibatAlhand",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "author": "Ionic Framework",
   "homepage": "https://ionicframework.com/",
   "scripts": {
@@ -29,10 +29,7 @@
     "@ionic/storage": "^2.2.0",
     "@ngx-pwa/local-storage": "^7.4.2",
     "core-js": "^2.5.4",
-    "localforage": "^1.5.0",
-    "ngforage": "^4.0.0",
     "ngx-indexed-db": "^2.0.8",
-    "rxjs": "~6.3.3",
     "zone.js": "~0.8.29"
   },
   "devDependencies": {

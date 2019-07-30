@@ -48,11 +48,19 @@
    
     <ion-content>
     <ion-grid>
+       
+        
+           
+        
       <ion-row justify-content-center align-items-center style="margin-top: 2px !important; margin-bottom:2px !important;">
+         
         <ion-card class="myCard" *ngFor="let jawlat of jawService.allJawlat" [ngSwitch] = "jawlat.values.winType">
+           
           <ion-grid class="myCard">
-          <ion-row justify-content-center align-items-center>
-            <ion-col  >
+           
+            <ion-row justify-content-center align-items-center>
+             <ion-col> {{ jawlat.id }}</ion-col>
+            <ion-col >
              <ion-label *ngIf="jawlat.values.winnerTeam =='lana';" > {{jawlat.values.lahomVal}}  </ion-label>
              <ion-label *ngIf="jawlat.values.winnerTeam =='lahom';" > {{ jawlat.values.lanaVal}}  </ion-label>
            </ion-col>
@@ -74,14 +82,12 @@
              <ion-col size="1">
               <ion-label *ngIf="jawlat.values.jawlahNo == 0; else elseBlock"> <ion-icon name="close-circle-outline" class="larger" color="danger"></ion-icon> </ion-label>
               <ng-template #elseBlock> <ion-label> {{ jawlat.values.jawlahNo }}</ion-label> </ng-template>
-               
             </ion-col>
-          </ion-row>
-              
+           </ion-row>
           </ion-grid>
         </ion-card>
         </ion-row>
-      </ion-grid>
+       </ion-grid>
       </ion-content>
       
 

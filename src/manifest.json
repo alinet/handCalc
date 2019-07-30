@@ -1,6 +1,6 @@
 {
-  "name": "HandCalc",
-  "short_name": "HandCalc",
+  "name": "حاسبة الهاند",
+  "short_name": "حاسبة الهاند",
   "theme_color": "#1976d2",
   "background_color": "#fafafa",
   "display": "standalone",

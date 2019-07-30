@@ -12,12 +12,14 @@ export class JawlatsDataService {
   public tasjlat = [];
   public values;
   handDB = new  NgxIndexedDB('handData', 1);
+  
  constructor() 
   { console.log('Jawlats Service Works');}
 
   createDB(){
     this.handDB.openDatabase(1, evt => {
       let objectStore = evt.currentTarget.result.createObjectStore('jawlatData', { keyPath: 'id', autoIncrement: true});
+     
       console.log('table creared and Open');
       });
   }
@@ -37,9 +39,8 @@ export class JawlatsDataService {
          console.log(this.jawlats.length);
           this.allJawlat = this.jawlats.concat(this.tasjlat);
           console.log(this.allJawlat);
-          return this.allJawlat
-           
-    },
+          return this.allJawlat;
+           },
        error => {
            console.log(error);
        }
@@ -57,7 +58,6 @@ export class JawlatsDataService {
             const tas = ja.filter(v => v.values.isTasjilah === true);
             this.tasjlat = tas;
             this.allJawlat = this.jawlats.concat(this.tasjlat);
-            
       },
       error => {
           console.log(error);
@@ -66,7 +66,7 @@ export class JawlatsDataService {
     });
     };
 
-   ClearData(){
+     ClearData(){
     this.handDB.clear('jawlatData').then(
       () => {
           console.log('Cleared');
@@ -82,5 +82,21 @@ export class JawlatsDataService {
         }
           );
         }
+
+editJawlah(num){
+  this.handDB.openDatabase(1, evt => {
+    let objectStore = evt.currentTarget.result.createObjectStore('jawlatData', { keyPath: 'id', autoIncrement: true});
+    console.log('table creared and Open');
+ }).then(() =>
+  this.handDB.getByKey('jawlatData', 75).then(
+    (ja) => {
+            console.log(ja);
+         },
+     error => {
+         console.log(error);
+     }
+ ));
+}
+
   }
 

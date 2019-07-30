@@ -48,7 +48,7 @@ this.jawService.createDB();
  ngOnInit() {
   this.currentJawlah = 1;
   this.jawService.getJawlat();
-  
+  this.jawService.editJawlah(65); 
  
 }
 ngDoCheck(){
@@ -56,19 +56,18 @@ ngDoCheck(){
     this.currentJawlah = this.jawService.jawlats.length + 1;
   }
   
-  var lanaTotal = this.jawService.allJawlat.reduce(function(prev, cur) {  
-    return prev + cur.values.lanaVal;
-    }, 0);
-    var lahomTotal = this.jawService.allJawlat.reduce(function(prev, cur) {  
-      return prev + cur.values.lahomVal;
-      }, 0);
+      var lanaTotal = this.jawService.allJawlat.reduce(function(prev, cur) {  
+      return prev + cur.values.lanaVal;
+        }, 0);
+      var lahomTotal = this.jawService.allJawlat.reduce(function(prev, cur) {  
+        return prev + cur.values.lahomVal;
+        }, 0);
       this.farq = Math.abs(Math.abs(lanaTotal) - Math.abs(lahomTotal));
 
       let lanaLabel = document.getElementById('lanalbl')
       let lahomLabel = document.getElementById('lahomlbl')
       if(Math.abs(lanaTotal) > Math.abs(lahomTotal)){
        // console.log('lana is a losser')
-       
         lanaLabel.style.color = 'red';
         lahomLabel.style.color = 'black';
       }else if(Math.abs(lahomTotal) > Math.abs(lanaTotal)) {
@@ -80,7 +79,7 @@ ngDoCheck(){
         lahomLabel.style.color = 'black';
       }
 
-      if(this.currentJawlah == 6 && this.farq > 600){
+      if(this.currentJawlah == 6 && this.farq > 660){
         this.toAddorNot = true;
     }
     if(this.currentJawlah == 5 && this.farq > 1320){
@@ -92,9 +91,7 @@ ngDoCheck(){
     if(this.currentJawlah == 8){
       this.toAddorNot = true;
     }
-
-   
-      
+ 
   }
 
 async openModal() {

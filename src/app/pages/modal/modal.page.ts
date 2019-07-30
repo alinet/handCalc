@@ -71,8 +71,8 @@ this.status = ev.detail.value;
   
   nazilValue(event) { this.nazilCount = event.detail.value; }
 
-  majmoValue(event){this.majmo = event.target.value; }
-
+  majmoValue(event){this.majmo = event.target.value;}
+  
   
   closeModal(): void {const modal = this.modalController.dismiss(); }  
 
