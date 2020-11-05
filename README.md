@@ -7,5 +7,5 @@ https://en.wikipedia.org/wiki/Rummy
 
 Built Using 
 
-.Angular 
-.Typescript
+*Angular 
+*Typescript
